@@ -1,0 +1,6 @@
+{
+  "name": "Mucuw — Catat Keuangan & Budgeting",
+  "description": "Aplikasi pencatat keuangan pribadi, smart receipt scanner AI, budgeting anti-bocor, tantangan hemat, dan perencana impian finansial.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
