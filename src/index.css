@@ -8,14 +8,10 @@
 }
 
 @layer base {
-  html,
-  body {
+  html {
     font-family: var(--font-sans);
     scroll-behavior: smooth;
-    overflow-x: hidden;
-    touch-action: pan-y;
     -webkit-text-size-adjust: 100%;
-    overscroll-behavior-y: contain;
   }
 
   .font-display {
