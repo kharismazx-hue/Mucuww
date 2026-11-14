@@ -8,6 +8,7 @@ import {
   Flame,
   PiggyBank,
   Target,
+  Trash2,
   TrendingDown,
   TrendingUp,
 } from "lucide-react";
@@ -111,6 +112,9 @@ interface OverviewViewProps {
   onNavigate: (tab: TabId) => void;
   onOpenNewTx: (defaultType?: TransactionType) => void;
   onOpenProfile: () => void;
+  onUpdateWalletBalance?: (walletId: string, newBalance: number) => void;
+  onDeleteWallet?: (walletId: string) => void;
+  onDeleteTransaction?: (id: string) => void;
 }
 
 export function OverviewView({
@@ -137,6 +141,9 @@ export function OverviewView({
   onNavigate,
   onOpenNewTx,
   onOpenProfile,
+  onUpdateWalletBalance,
+  onDeleteWallet,
+  onDeleteTransaction,
 }: OverviewViewProps) {
   const [trendMode, setTrendMode] = useState<"cumulative" | "daily">("cumulative");
   const prevMonthKey = useMemo(() => getPreviousMonthKey(selectedMonth), [selectedMonth]);
@@ -413,6 +420,8 @@ export function OverviewView({
         onOpenTransfer={() => onNavigate("wallets")}
         onOpenAiInsights={() => onNavigate("wallets")}
         onOpenProfile={onOpenProfile}
+        onUpdateWalletBalance={onUpdateWalletBalance}
+        onDeleteWallet={onDeleteWallet}
       />
 
       {/* 4-Pill Glass Features Strip (Matching Reference Layout) */}
@@ -570,7 +579,7 @@ export function OverviewView({
         )}
       </section>
 
-      {/* Recent Transactions (Transaksi Terakhir) */}
+      {/* Recent Transactions (Transaksi Terakhir) with Quick Delete */}
       <section className="glass-panel rounded-3xl p-4">
         <div className="flex items-center justify-between">
           <h3 className="font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
@@ -587,45 +596,63 @@ export function OverviewView({
         </div>
 
         <div className="mt-3 divide-y divide-white/55 dark:divide-white/10">
-          {scopedTxs.slice(0, 5).map((tx) => {
-            const catColor = getCategoryColor(tx.category, customCategories);
-            return (
-              <div
-                key={tx.id}
-                className="flex items-center justify-between gap-3 py-2.5"
-              >
-                <div className="flex min-w-0 items-center gap-2.5">
-                  <div
-                    className="glass-soft flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-slate-700 dark:text-slate-200"
-                    style={{ color: catColor }}
-                  >
-                    <CategoryIcon category={tx.category} className="h-4 w-4" />
+          {scopedTxs.length === 0 ? (
+            <p className="py-4 text-center text-xs text-slate-500 dark:text-slate-400">
+              {language === "en" ? "No transactions yet." : "Belum ada transaksi."}
+            </p>
+          ) : (
+            scopedTxs.slice(0, 5).map((tx) => {
+              const catColor = getCategoryColor(tx.category, customCategories);
+              return (
+                <div
+                  key={tx.id}
+                  className="flex items-center justify-between gap-2.5 py-2.5"
+                >
+                  <div className="flex min-w-0 items-center gap-2.5">
+                    <div
+                      className="glass-soft flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-slate-700 dark:text-slate-200"
+                      style={{ color: catColor }}
+                    >
+                      <CategoryIcon category={tx.category} className="h-4 w-4" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="truncate text-xs font-bold text-[#241F35] dark:text-slate-100">
+                        {tx.merchant}
+                      </p>
+                      <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">
+                        {getCategoryLabel(tx.category, language, customCategories)} ·{" "}
+                        {walletMap[tx.walletId] ?? "Dompet"} ·{" "}
+                        {formatShortDate(tx.date, language)}
+                      </p>
+                    </div>
                   </div>
-                  <div className="min-w-0">
-                    <p className="truncate text-xs font-bold text-[#241F35] dark:text-slate-100">
-                      {tx.merchant}
+
+                  <div className="flex items-center gap-1.5 shrink-0">
+                    <p
+                      className={`font-mono text-xs font-bold tabular-nums ${
+                        tx.type === "income"
+                          ? "text-emerald-600 dark:text-emerald-400"
+                          : "text-rose-600 dark:text-rose-400"
+                      }`}
+                    >
+                      {tx.type === "income" ? "+" : "-"}
+                      {formatCurrency(tx.amount, currency, privacyMode)}
                     </p>
-                    <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">
-                      {getCategoryLabel(tx.category, language, customCategories)} ·{" "}
-                      {walletMap[tx.walletId] ?? "Dompet"} ·{" "}
-                      {formatShortDate(tx.date, language)}
-                    </p>
+                    {onDeleteTransaction && (
+                      <button
+                        type="button"
+                        onClick={() => onDeleteTransaction(tx.id)}
+                        aria-label="Hapus transaksi"
+                        className="rounded-lg p-1 text-slate-400 transition-colors hover:bg-rose-100 hover:text-rose-600 dark:hover:bg-rose-900/40 cursor-pointer"
+                      >
+                        <Trash2 className="h-3.5 w-3.5" />
+                      </button>
+                    )}
                   </div>
                 </div>
-
-                <p
-                  className={`shrink-0 font-mono text-xs font-bold tabular-nums ${
-                    tx.type === "income"
-                      ? "text-emerald-600 dark:text-emerald-400"
-                      : "text-rose-600 dark:text-rose-400"
-                  }`}
-                >
-                  {tx.type === "income" ? "+" : "-"}
-                  {formatCurrency(tx.amount, currency, privacyMode)}
-                </p>
-              </div>
-            );
-          })}
+              );
+            })
+          )}
         </div>
       </section>
 
