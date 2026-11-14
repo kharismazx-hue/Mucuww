@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { Plus } from "lucide-react";
 import { Language, TabId } from "../types/finance";
 
 interface MobileBottomNavProps {
   activeTab: TabId;
   language: Language;
   onSelectTab: (tab: TabId) => void;
+  onQuickAdd?: () => void;
 }
 
 type KawaiiIconName =
@@ -103,9 +105,9 @@ function KawaiiNavIcon({
     case "scanner":
       return (
         <span
-          className={`flex h-9 w-9 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#FEF3C7]/90 via-[#FDE68A]/90 to-[#FBCFE8]/90 shadow-[0_6px_14px_-6px_rgba(245,158,11,0.5)] backdrop-blur-md transition-transform dark:border-amber-400/35 dark:from-amber-800/85 dark:to-pink-900/85 ${wrapperGlow}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#FEF3C7]/90 via-[#FDE68A]/90 to-[#FBCFE8]/90 backdrop-blur-md transition-transform dark:border-amber-400/35 dark:from-amber-800/85 dark:to-pink-900/85 ${wrapperGlow}`}
         >
-          <svg viewBox="0 0 28 28" className="h-5.5 w-5.5" aria-hidden="true">
+          <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
             <path
               d="M9.5 8 L11 5.8 H17 L18.5 8"
               fill="#FFFBEB"
@@ -152,9 +154,7 @@ function KawaiiNavIcon({
 
     case "budgets":
       return (
-        <span
-          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/85 bg-gradient-to-br from-[#FFE0EE]/85 to-[#FBCFE8]/85 backdrop-blur-md transition-transform dark:border-pink-400/30 dark:from-pink-900/80 dark:to-rose-900/80 ${wrapperGlow}`}
-        >
+        <span className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#FFE0EE] to-[#FBCFE8] dark:border-pink-400/30 dark:from-pink-900/80 dark:to-rose-900/80">
           <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
             <circle cx="9.2" cy="8.5" r="2.4" fill="#F9A8D4" stroke="#241F35" strokeWidth="1.4" />
             <circle cx="18.8" cy="8.5" r="2.4" fill="#F9A8D4" stroke="#241F35" strokeWidth="1.4" />
@@ -172,8 +172,6 @@ function KawaiiNavIcon({
             <circle cx="11.2" cy="14.2" r="1" fill="#241F35" />
             <circle cx="16.8" cy="14.2" r="1" fill="#241F35" />
             <ellipse cx="14" cy="16.6" rx="2.7" ry="1.8" fill="#FBCFE8" stroke="#241F35" strokeWidth="1.1" />
-            <circle cx="13.1" cy="16.6" r="0.55" fill="#241F35" />
-            <circle cx="14.9" cy="16.6" r="0.55" fill="#241F35" />
           </svg>
         </span>
       );
@@ -207,8 +205,6 @@ function KawaiiNavIcon({
             <path d="M9.5 5 V8.5 M18.5 5 V8.5" stroke="#241F35" strokeWidth="1.7" strokeLinecap="round" />
             <circle cx="11.3" cy="16" r="1" fill="#241F35" />
             <circle cx="16.7" cy="16" r="1" fill="#241F35" />
-            <ellipse cx="9.8" cy="17.7" rx="1.1" ry="0.6" fill="#FF9EC6" />
-            <ellipse cx="18.2" cy="17.7" rx="1.1" ry="0.6" fill="#FF9EC6" />
             <path d="M12.6 18 Q14 19.3 15.4 18" fill="none" stroke="#241F35" strokeWidth="1.3" strokeLinecap="round" />
           </svg>
         </span>
@@ -227,7 +223,6 @@ function KawaiiNavIcon({
             />
             <circle cx="12.2" cy="13.8" r="0.9" fill="#241F35" />
             <circle cx="15.8" cy="13.8" r="0.9" fill="#241F35" />
-            <path d="M12.8 15.6 Q14 16.6 15.2 15.6" fill="none" stroke="#241F35" strokeWidth="1.2" strokeLinecap="round" />
           </svg>
         </span>
       );
@@ -241,8 +236,6 @@ function KawaiiNavIcon({
             <circle cx="19.4" cy="14.5" r="0.9" fill="#241F35" />
             <circle cx="9.8" cy="13.5" r="1" fill="#241F35" />
             <circle cx="13.6" cy="13.5" r="1" fill="#241F35" />
-            <ellipse cx="8.7" cy="15.2" rx="1.1" ry="0.6" fill="#FF9EC6" />
-            <path d="M10.7 15.5 Q11.7 16.6 12.7 15.5" fill="none" stroke="#241F35" strokeWidth="1.3" strokeLinecap="round" />
           </svg>
         </span>
       );
@@ -253,36 +246,39 @@ export function MobileBottomNav({
   activeTab,
   language,
   onSelectTab,
+  onQuickAdd,
 }: MobileBottomNavProps) {
   const [moreOpen, setMoreOpen] = useState(false);
 
   const secondaryTabs: Array<{
     id: TabId;
     label: string;
-    desc: string;
     icon: KawaiiIconName;
   }> = [
     {
-      id: "calendar",
-      label: language === "en" ? "Calendar" : "Kalender",
-      desc: language === "en" ? "Daily activity" : "Jadwal harian",
-      icon: "calendar",
-    },
-    {
-      id: "dreams",
-      label: language === "en" ? "Dreams" : "Impian",
-      desc: language === "en" ? "Goals & jars" : "Tabungan target",
-      icon: "dreams",
+      id: "budgets",
+      label: "Budget",
+      icon: "budgets",
     },
     {
       id: "wallets",
       label: language === "en" ? "Wallets" : "Dompet",
-      desc: language === "en" ? "Accounts & AI" : "Saldo & Audit",
       icon: "wallets",
+    },
+    {
+      id: "dreams",
+      label: language === "en" ? "Dreams" : "Impian",
+      icon: "dreams",
+    },
+    {
+      id: "calendar",
+      label: language === "en" ? "Calendar" : "Kalender",
+      icon: "calendar",
     },
   ];
 
   const isSecondaryActive =
+    activeTab === "budgets" ||
     activeTab === "calendar" ||
     activeTab === "dreams" ||
     activeTab === "wallets";
@@ -295,33 +291,6 @@ export function MobileBottomNav({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [moreOpen]);
-
-  const primaryTabs: Array<{
-    id: TabId;
-    label: string;
-    icon: KawaiiIconName;
-  }> = [
-    {
-      id: "overview",
-      label: language === "en" ? "Home" : "Ringkas",
-      icon: "overview",
-    },
-    {
-      id: "transactions",
-      label: language === "en" ? "Ledger" : "Catatan",
-      icon: "transactions",
-    },
-    {
-      id: "scanner",
-      label: language === "en" ? "Scan" : "Scan AI",
-      icon: "scanner",
-    },
-    {
-      id: "budgets",
-      label: language === "en" ? "Budget" : "Budget",
-      icon: "budgets",
-    },
-  ];
 
   return (
     <>
@@ -342,7 +311,7 @@ export function MobileBottomNav({
           <p className="px-2 pb-2 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
             {language === "en" ? "More Mucuw Features" : "Fitur Lainnya"}
           </p>
-          <div className="grid grid-cols-3 gap-2">
+          <div className="grid grid-cols-4 gap-2">
             {secondaryTabs.map((item) => {
               const active = activeTab === item.id;
               return (
@@ -370,32 +339,81 @@ export function MobileBottomNav({
         </div>
       )}
 
-      {/* Frosted Glass Mobile Bottom Dock inside 430px Shell */}
+      {/* Frosted Glass Bottom Dock with Center + Button */}
       <nav
         aria-label="Navigasi Mobile"
         className="fixed inset-x-0 bottom-0 z-40 mx-auto grid w-full max-w-[430px] grid-cols-5 items-center border-t border-white/70 bg-white/55 px-1.5 py-1.5 backdrop-blur-2xl dark:border-white/15 dark:bg-[#0F1619]/65"
       >
-        {primaryTabs.map((item) => {
-          const active = activeTab === item.id;
-          return (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => {
-                setMoreOpen(false);
-                onSelectTab(item.id);
-              }}
-              className={`flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-2xl py-1 transition-transform active:scale-95 whitespace-nowrap cursor-pointer ${
-                active
-                  ? "text-[#241F35] font-bold dark:text-emerald-300"
-                  : "text-slate-600 font-semibold dark:text-slate-400"
-              }`}
-            >
-              <KawaiiNavIcon name={item.icon} active={active} />
-              <span className="text-[10px] leading-none">{item.label}</span>
-            </button>
-          );
-        })}
+        <button
+          type="button"
+          onClick={() => {
+            setMoreOpen(false);
+            onSelectTab("overview");
+          }}
+          className={`flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-2xl py-1 transition-transform active:scale-95 whitespace-nowrap cursor-pointer ${
+            activeTab === "overview"
+              ? "text-[#241F35] font-bold dark:text-emerald-300"
+              : "text-slate-600 font-semibold dark:text-slate-400"
+          }`}
+        >
+          <KawaiiNavIcon name="overview" active={activeTab === "overview"} />
+          <span className="text-[10px] leading-none">Home</span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setMoreOpen(false);
+            onSelectTab("scanner");
+          }}
+          className={`flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-2xl py-1 transition-transform active:scale-95 whitespace-nowrap cursor-pointer ${
+            activeTab === "scanner"
+              ? "text-[#241F35] font-bold dark:text-emerald-300"
+              : "text-slate-600 font-semibold dark:text-slate-400"
+          }`}
+        >
+          <KawaiiNavIcon name="scanner" active={activeTab === "scanner"} />
+          <span className="text-[10px] leading-none">
+            {language === "en" ? "Scan" : "Scan AI"}
+          </span>
+        </button>
+
+        {/* Center + Quick Add Button */}
+        <button
+          type="button"
+          onClick={() => {
+            setMoreOpen(false);
+            if (onQuickAdd) onQuickAdd();
+            else onSelectTab("transactions");
+          }}
+          aria-label="Catat Transaksi"
+          className="flex items-center justify-center cursor-pointer"
+        >
+          <span className="flex h-11 w-11 items-center justify-center rounded-full border border-white/85 bg-[#241F35] text-white shadow-md transition-transform active:scale-90 dark:bg-emerald-600">
+            <Plus className="h-5 w-5" />
+          </span>
+        </button>
+
+        <button
+          type="button"
+          onClick={() => {
+            setMoreOpen(false);
+            onSelectTab("transactions");
+          }}
+          className={`flex min-h-[48px] flex-col items-center justify-center gap-1 rounded-2xl py-1 transition-transform active:scale-95 whitespace-nowrap cursor-pointer ${
+            activeTab === "transactions"
+              ? "text-[#241F35] font-bold dark:text-emerald-300"
+              : "text-slate-600 font-semibold dark:text-slate-400"
+          }`}
+        >
+          <KawaiiNavIcon
+            name="transactions"
+            active={activeTab === "transactions"}
+          />
+          <span className="text-[10px] leading-none">
+            {language === "en" ? "Ledger" : "Transaksi"}
+          </span>
+        </button>
 
         <button
           type="button"
@@ -407,7 +425,10 @@ export function MobileBottomNav({
               : "text-slate-600 font-semibold dark:text-slate-400"
           }`}
         >
-          <KawaiiNavIcon name="more" active={moreOpen || isSecondaryActive} />
+          <KawaiiNavIcon
+            name="more"
+            active={moreOpen || isSecondaryActive}
+          />
           <span className="text-[10px] leading-none">
             {isSecondaryActive
               ? secondaryTabs.find((s) => s.id === activeTab)?.label
