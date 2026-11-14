@@ -28,10 +28,9 @@ function KawaiiNavIcon({
 
   switch (name) {
     case "overview":
-      // Cute pastel Mochi house with smiling face
       return (
         <span
-          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#D8FCE7] to-[#A7F3D0] transition-transform dark:border-emerald-400/30 dark:from-emerald-800/80 dark:to-emerald-900/80 ${wrapperGlow}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/85 bg-gradient-to-br from-[#D8FCE7]/85 to-[#A7F3D0]/85 backdrop-blur-md transition-transform dark:border-emerald-400/30 dark:from-emerald-800/80 dark:to-emerald-900/80 ${wrapperGlow}`}
         >
           <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
             <path
@@ -68,10 +67,9 @@ function KawaiiNavIcon({
       );
 
     case "transactions":
-      // Cute smiling pastel notebook / receipt
       return (
         <span
-          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#DBEAFE] to-[#BFDBFE] transition-transform dark:border-sky-400/30 dark:from-sky-800/80 dark:to-blue-900/80 ${wrapperGlow}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/85 bg-gradient-to-br from-[#DBEAFE]/85 to-[#BFDBFE]/85 backdrop-blur-md transition-transform dark:border-sky-400/30 dark:from-sky-800/80 dark:to-blue-900/80 ${wrapperGlow}`}
         >
           <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
             <path
@@ -103,10 +101,9 @@ function KawaiiNavIcon({
       );
 
     case "scanner":
-      // Cute pastel kawaii camera with sparkle
       return (
         <span
-          className={`flex h-9 w-9 items-center justify-center rounded-2xl border border-white/95 bg-gradient-to-br from-[#FEF3C7] via-[#FDE68A] to-[#FBCFE8] shadow-[0_6px_14px_-6px_rgba(245,158,11,0.5)] transition-transform dark:border-amber-400/35 dark:from-amber-800/85 dark:to-pink-900/85 ${wrapperGlow}`}
+          className={`flex h-9 w-9 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#FEF3C7]/90 via-[#FDE68A]/90 to-[#FBCFE8]/90 shadow-[0_6px_14px_-6px_rgba(245,158,11,0.5)] backdrop-blur-md transition-transform dark:border-amber-400/35 dark:from-amber-800/85 dark:to-pink-900/85 ${wrapperGlow}`}
         >
           <svg viewBox="0 0 28 28" className="h-5.5 w-5.5" aria-hidden="true">
             <path
@@ -154,10 +151,9 @@ function KawaiiNavIcon({
       );
 
     case "budgets":
-      // Cute pastel piggy bank with tiny ears & smile
       return (
         <span
-          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#FFE0EE] to-[#FBCFE8] transition-transform dark:border-pink-400/30 dark:from-pink-900/80 dark:to-rose-900/80 ${wrapperGlow}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/85 bg-gradient-to-br from-[#FFE0EE]/85 to-[#FBCFE8]/85 backdrop-blur-md transition-transform dark:border-pink-400/30 dark:from-pink-900/80 dark:to-rose-900/80 ${wrapperGlow}`}
         >
           <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
             <circle cx="9.2" cy="8.5" r="2.4" fill="#F9A8D4" stroke="#241F35" strokeWidth="1.4" />
@@ -183,10 +179,9 @@ function KawaiiNavIcon({
       );
 
     case "more":
-      // Cute pastel Mochi clover / bento sparkle box
       return (
         <span
-          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#EDE9FE] to-[#DDD6FE] transition-transform dark:border-purple-400/30 dark:from-purple-900/80 dark:to-violet-900/80 ${wrapperGlow}`}
+          className={`flex h-8 w-8 items-center justify-center rounded-2xl border border-white/85 bg-gradient-to-br from-[#EDE9FE]/85 to-[#DDD6FE]/85 backdrop-blur-md transition-transform dark:border-purple-400/30 dark:from-purple-900/80 dark:to-violet-900/80 ${wrapperGlow}`}
         >
           <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
             <rect x="5.5" y="5.5" width="7.2" height="7.2" rx="2.4" fill="#FFFDF9" stroke="#241F35" strokeWidth="1.5" />
@@ -204,7 +199,6 @@ function KawaiiNavIcon({
       );
 
     case "calendar":
-      // Cute pastel smiling calendar
       return (
         <span className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#FFE4F2] to-[#E9D5FF] dark:border-purple-400/30 dark:from-purple-900/80 dark:to-pink-900/80">
           <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
@@ -221,7 +215,6 @@ function KawaiiNavIcon({
       );
 
     case "dreams":
-      // Cute pastel smiling star goal
       return (
         <span className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#FEF9C3] to-[#FDE68A] dark:border-amber-400/30 dark:from-amber-900/80 dark:to-yellow-900/80">
           <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
@@ -240,7 +233,6 @@ function KawaiiNavIcon({
       );
 
     case "wallets":
-      // Cute pastel smiling wallet
       return (
         <span className="flex h-9 w-9 items-center justify-center rounded-2xl border border-white/90 bg-gradient-to-br from-[#CFFAFE] to-[#A7F3D0] dark:border-teal-400/30 dark:from-teal-900/80 dark:to-emerald-900/80">
           <svg viewBox="0 0 28 28" className="h-5 w-5" aria-hidden="true">
@@ -333,10 +325,9 @@ export function MobileBottomNav({
 
   return (
     <>
-      {/* Backdrop & Frosted Drawer for the 3 extra tabs when 'Lainnya' is tapped */}
       {moreOpen && (
         <div
-          className="fixed inset-0 z-40 bg-slate-950/25 backdrop-blur-[2px] lg:hidden"
+          className="fixed inset-0 z-40 bg-slate-950/25 backdrop-blur-[2px]"
           onClick={() => setMoreOpen(false)}
           aria-hidden="true"
         />
@@ -346,7 +337,7 @@ export function MobileBottomNav({
         <div
           role="dialog"
           aria-label={language === "en" ? "More features" : "Menu lainnya"}
-          className="glass-modal fixed right-3 bottom-20 z-50 w-[min(92vw,340px)] rounded-3xl p-3 shadow-2xl lg:hidden"
+          className="glass-modal fixed bottom-20 left-1/2 z-50 w-[min(92vw,380px)] -translate-x-1/2 rounded-3xl p-3 shadow-2xl"
         >
           <p className="px-2 pb-2 text-[11px] font-semibold text-slate-500 dark:text-slate-400">
             {language === "en" ? "More Mucuw Features" : "Fitur Lainnya"}
@@ -364,8 +355,8 @@ export function MobileBottomNav({
                   }}
                   className={`flex min-h-[72px] flex-col items-center justify-center gap-1.5 rounded-2xl p-2 text-center transition-transform active:scale-95 cursor-pointer ${
                     active
-                      ? "bg-white/90 text-[#241F35] ring-1 ring-[#241F35]/15 shadow-xs dark:bg-emerald-500/20 dark:text-emerald-200"
-                      : "hover:bg-white/60 text-slate-700 dark:text-slate-200 dark:hover:bg-white/10"
+                      ? "bg-white/80 text-[#241F35] ring-1 ring-[#241F35]/15 shadow-xs dark:bg-emerald-500/20 dark:text-emerald-200"
+                      : "hover:bg-white/50 text-slate-700 dark:text-slate-200 dark:hover:bg-white/10"
                   }`}
                 >
                   <KawaiiNavIcon name={item.icon} active={active} />
@@ -379,10 +370,10 @@ export function MobileBottomNav({
         </div>
       )}
 
-      {/* Compact 5-Column Kawaii Mobile Bottom Dock */}
+      {/* Frosted Glass Mobile Bottom Dock inside 430px Shell */}
       <nav
         aria-label="Navigasi Mobile"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 items-center border-t border-white/75 bg-white/82 px-1.5 py-1.5 backdrop-blur-xl dark:border-white/10 dark:bg-[#0F1619]/88 lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-40 mx-auto grid w-full max-w-[430px] grid-cols-5 items-center border-t border-white/70 bg-white/55 px-1.5 py-1.5 backdrop-blur-2xl dark:border-white/15 dark:bg-[#0F1619]/65"
       >
         {primaryTabs.map((item) => {
           const active = activeTab === item.id;
