@@ -4,7 +4,9 @@ import {
   ArrowRight,
   ArrowUpRight,
   Award,
+  CalendarDays,
   Flame,
+  PiggyBank,
   Target,
   TrendingDown,
   TrendingUp,
@@ -244,7 +246,7 @@ export function OverviewView({
       .sort((a, b) => b.amount - a.amount);
 
     const total = entries.reduce((sum, e) => sum + e.amount, 0);
-    const radius = 58;
+    const radius = 54;
     const circumference = 2 * Math.PI * radius;
     let cumulative = 0;
 
@@ -383,7 +385,7 @@ export function OverviewView({
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <MascotBanner
         userName={userName}
         wallets={wallets}
@@ -413,260 +415,431 @@ export function OverviewView({
         onOpenProfile={onOpenProfile}
       />
 
-      {/* 4-Column Frosted Glass KPI Strip */}
-      <section
-        aria-label="Ringkasan Metrik Utama"
-        className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4"
-      >
-        <div className="glass-panel rounded-3xl p-5">
-          <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
-            {language === "en" ? "Total Net Balance" : "Total Saldo Seluruh Dompet"}
-          </p>
-          <p className="mt-2 font-mono text-2xl font-semibold tabular-nums text-slate-900 dark:text-slate-100">
-            {formatCurrency(totalNetWorth, currency, privacyMode)}
-          </p>
-          <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
-            {wallets.length} {language === "en" ? "active accounts" : "dompet aktif"}
-          </p>
+      {/* 4-Pill Glass Features Strip (Matching Reference Layout) */}
+      <section aria-label="Fitur Cepat">
+        <div className="mb-2 flex items-center justify-between px-0.5">
+          <h3 className="font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
+            Features
+          </h3>
         </div>
+        <div className="grid grid-cols-4 gap-2">
+          <button
+            type="button"
+            onClick={() => onNavigate("wallets")}
+            className="flex flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/75 bg-emerald-200/45 px-1.5 py-2.5 text-center backdrop-blur-xl shadow-xs transition-transform active:scale-95 dark:border-emerald-400/25 dark:bg-emerald-900/35 cursor-pointer"
+          >
+            <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-white/75 text-emerald-600 dark:bg-emerald-950/60 dark:text-emerald-300">
+              <Award className="h-4 w-4" />
+            </span>
+            <span className="text-[10px] font-bold leading-tight text-[#241F35] dark:text-slate-100">
+              {language === "en" ? "Cuan Score" : "Cuan Audit"}
+            </span>
+          </button>
 
-        <div className="glass-panel rounded-3xl p-5">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
-              {language === "en" ? "Monthly Income" : "Pemasukan Bulan Ini"}
-            </p>
-            <ArrowDownLeft className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-          </div>
-          <p className="mt-2 font-mono text-2xl font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">
-            {formatCurrency(monthlyIncome, currency, privacyMode)}
-          </p>
-          <p className="mt-1.5 font-mono text-xs tabular-nums text-slate-500 dark:text-slate-400">
-            {language === "en" ? "Savings rate" : "Rasio nabung"} {savingsRate}%
-          </p>
-        </div>
+          <button
+            type="button"
+            onClick={() => onNavigate("budgets")}
+            className="flex flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/75 bg-purple-200/45 px-1.5 py-2.5 text-center backdrop-blur-xl shadow-xs transition-transform active:scale-95 dark:border-purple-400/25 dark:bg-purple-900/35 cursor-pointer"
+          >
+            <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-white/75 text-purple-600 dark:bg-purple-950/60 dark:text-purple-300">
+              <PiggyBank className="h-4 w-4" />
+            </span>
+            <span className="text-[10px] font-bold leading-tight text-[#241F35] dark:text-slate-100">
+              {language === "en" ? "Challenge" : "Budgeting"}
+            </span>
+          </button>
 
-        <div className="glass-panel rounded-3xl p-5">
-          <div className="flex items-center justify-between">
-            <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
-              {language === "en" ? "Monthly Expense" : "Pengeluaran Bulan Ini"}
-            </p>
-            <ArrowUpRight className="h-4 w-4 text-rose-600 dark:text-rose-400" />
-          </div>
-          <p className="mt-2 font-mono text-2xl font-semibold tabular-nums text-slate-900 dark:text-slate-100">
-            {formatCurrency(monthlyExpense, currency, privacyMode)}
-          </p>
-          <p className="mt-1.5 font-mono text-xs tabular-nums text-slate-500 dark:text-slate-400">
-            {language === "en" ? "Of budget" : "Dari batas"}{" "}
-            {formatCurrency(totalMonthlyBudget, currency, privacyMode)}
-          </p>
-        </div>
+          <button
+            type="button"
+            onClick={() => onNavigate("dreams")}
+            className="flex flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/75 bg-sky-200/45 px-1.5 py-2.5 text-center backdrop-blur-xl shadow-xs transition-transform active:scale-95 dark:border-sky-400/25 dark:bg-sky-900/35 cursor-pointer"
+          >
+            <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-white/75 text-sky-600 dark:bg-sky-950/60 dark:text-sky-300">
+              <Target className="h-4 w-4" />
+            </span>
+            <span className="text-[10px] font-bold leading-tight text-[#241F35] dark:text-slate-100">
+              {language === "en" ? "Dreams" : "Dream Journey"}
+            </span>
+          </button>
 
-        <div className="glass-panel rounded-3xl p-5">
-          <p className="text-xs font-medium text-slate-500 dark:text-slate-400">
-            {language === "en" ? "Safe Daily Limit" : "Jatah Aman Harian"}
-          </p>
-          <p className="mt-2 font-mono text-2xl font-semibold tabular-nums text-slate-900 dark:text-slate-100">
-            {formatCurrency(dailySafeLimit, currency, privacyMode)}
-          </p>
-          <p className="mt-1.5 text-xs text-slate-500 dark:text-slate-400">
-            {remainingBudget >= 0
-              ? language === "en"
-                ? "Under monthly cap"
-                : "Masih di bawah batas bulanan"
-              : language === "en"
-                ? "Monthly limit exceeded"
-                : "Melebihi batas bulanan"}
-          </p>
+          <button
+            type="button"
+            onClick={() => onNavigate("calendar")}
+            className="flex flex-col items-center justify-center gap-1.5 rounded-2xl border border-white/75 bg-pink-200/45 px-1.5 py-2.5 text-center backdrop-blur-xl shadow-xs transition-transform active:scale-95 dark:border-pink-400/25 dark:bg-pink-900/35 cursor-pointer"
+          >
+            <span className="flex h-7 w-7 items-center justify-center rounded-xl bg-white/75 text-pink-600 dark:bg-pink-950/60 dark:text-pink-300">
+              <CalendarDays className="h-4 w-4" />
+            </span>
+            <span className="text-[10px] font-bold leading-tight text-[#241F35] dark:text-slate-100">
+              {language === "en" ? "Calendar" : "Kalender"}
+            </span>
+          </button>
         </div>
       </section>
 
-      {/* Analytical Split: Donut Chart + Daily Cashflow + Category Budgets */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {/* SVG Donut Chart (Mochi "Pengeluaran bulan ini") */}
-        <section className="glass-panel rounded-3xl p-6 lg:col-span-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className="font-display text-base font-semibold text-slate-900 dark:text-slate-100">
-                {language === "en"
-                  ? "This Month's Spending"
-                  : "Pengeluaran Bulan Ini"}
-              </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                {language === "en"
-                  ? "Category share breakdown"
-                  : "Porsi pengeluaran per kategori"}
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={() => onNavigate("wallets")}
-              className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 hover:underline dark:text-emerald-400 whitespace-nowrap cursor-pointer"
-            >
-              <span>{language === "en" ? "Details" : "Detail"}</span>
-              <ArrowRight className="h-3.5 w-3.5" />
-            </button>
-          </div>
-
-          {donutSegments.total === 0 ? (
-            <div className="mt-8 flex h-44 items-center justify-center rounded-lg border border-dashed border-slate-200 text-xs text-slate-500 dark:border-slate-800">
+      {/* Donut Chart: Pengeluaran Bulan Ini (Compact Mobile Row) */}
+      <section className="glass-panel rounded-3xl p-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h3 className="font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
               {language === "en"
-                ? "No expenses recorded this month."
-                : "Belum ada pengeluaran bulan ini."}
-            </div>
-          ) : (
-            <div className="mt-5 flex flex-col items-center gap-5 sm:flex-row">
-              <div className="relative h-40 w-40 shrink-0">
-                <svg viewBox="0 0 160 160" className="h-full w-full -rotate-90">
+                ? "This Month's Spending"
+                : "Pengeluaran bulan ini"}
+            </h3>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400">
+              {language === "en"
+                ? "Category share breakdown"
+                : "Porsi pengeluaran per kategori"}
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={() => onNavigate("wallets")}
+            className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:underline dark:text-emerald-400 whitespace-nowrap cursor-pointer"
+          >
+            <span>{language === "en" ? "Details" : "Detail"}</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+
+        {donutSegments.total === 0 ? (
+          <div className="mt-4 flex h-32 items-center justify-center rounded-2xl border border-dashed border-white/70 text-xs text-slate-500 dark:border-slate-700">
+            {language === "en"
+              ? "No expenses recorded this month."
+              : "Belum ada pengeluaran bulan ini."}
+          </div>
+        ) : (
+          <div className="mt-3.5 flex items-center gap-3.5">
+            <div className="relative h-32 w-32 shrink-0">
+              <svg viewBox="0 0 160 160" className="h-full w-full -rotate-90">
+                <circle
+                  cx="80"
+                  cy="80"
+                  r={donutSegments.radius}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="22"
+                  className="text-white/50 dark:text-slate-800/80"
+                />
+                {donutSegments.items.map((seg) => (
                   <circle
+                    key={seg.category}
                     cx="80"
                     cy="80"
                     r={donutSegments.radius}
                     fill="none"
-                    stroke="currentColor"
+                    stroke={seg.color}
                     strokeWidth="22"
-                    className="text-slate-100 dark:text-slate-800"
+                    strokeDasharray={`${seg.dash} ${donutSegments.circumference}`}
+                    strokeDashoffset={seg.offset}
                   />
-                  {donutSegments.items.map((seg) => (
-                    <circle
-                      key={seg.category}
-                      cx="80"
-                      cy="80"
-                      r={donutSegments.radius}
-                      fill="none"
-                      stroke={seg.color}
-                      strokeWidth="22"
-                      strokeDasharray={`${seg.dash} ${donutSegments.circumference}`}
-                      strokeDashoffset={seg.offset}
-                    />
-                  ))}
-                </svg>
-                <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
-                  <span className="text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                    Total
-                  </span>
-                  <span className="mt-0.5 font-mono text-xs font-bold tabular-nums text-slate-900 dark:text-slate-100">
-                    {formatCurrency(donutSegments.total, currency, privacyMode)}
-                  </span>
-                </div>
+                ))}
+              </svg>
+              <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span className="text-[9px] font-semibold uppercase tracking-wide text-slate-400">
+                  Total
+                </span>
+                <span className="mt-0.5 font-mono text-[11px] font-bold tabular-nums text-[#241F35] dark:text-slate-100">
+                  {formatCurrency(donutSegments.total, currency, privacyMode)}
+                </span>
               </div>
+            </div>
 
-              <div className="min-w-0 flex-1 space-y-2.5 w-full">
-                {donutSegments.items.slice(0, 5).map((seg) => (
-                  <div
-                    key={seg.category}
-                    className="flex items-center justify-between gap-2 text-xs"
-                  >
-                    <div className="flex min-w-0 items-center gap-2">
-                      <span
-                        className="h-2.5 w-2.5 shrink-0 rounded-full"
-                        style={{ backgroundColor: seg.color }}
-                      />
-                      <span className="truncate font-medium text-slate-700 dark:text-slate-200">
-                        {seg.label}
-                      </span>
-                    </div>
-                    <span className="shrink-0 font-mono tabular-nums text-slate-500 dark:text-slate-400">
-                      {seg.pct}%
+            <div className="min-w-0 flex-1 space-y-2">
+              {donutSegments.items.slice(0, 5).map((seg) => (
+                <div
+                  key={seg.category}
+                  className="flex items-center justify-between gap-2 text-xs"
+                >
+                  <div className="flex min-w-0 items-center gap-1.5">
+                    <span
+                      className="h-2.5 w-2.5 shrink-0 rounded-full"
+                      style={{ backgroundColor: seg.color }}
+                    />
+                    <span className="truncate font-medium text-slate-700 dark:text-slate-200">
+                      {seg.label}
                     </span>
                   </div>
-                ))}
-              </div>
-            </div>
-          )}
-        </section>
-
-        {/* Daily Cashflow Bar Chart */}
-        <section className="glass-panel rounded-3xl p-6 lg:col-span-7">
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <div>
-              <h3 className="font-display text-base font-semibold text-slate-900 dark:text-slate-100">
-                {language === "en"
-                  ? "Recent Activity Cashflow"
-                  : "Arus Kas Aktivitas Terakhir"}
-              </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
-                {language === "en"
-                  ? "Income vs Expense across active days"
-                  : "Perbandingan pemasukan dan pengeluaran harian"}
-              </p>
-            </div>
-            <div className="flex items-center gap-4 text-xs text-slate-600 dark:text-slate-400">
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-xs bg-emerald-500" />
-                {language === "en" ? "Income" : "Masuk"}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-xs bg-slate-800 dark:bg-slate-300" />
-                {language === "en" ? "Expense" : "Keluar"}
-              </span>
+                  <span className="shrink-0 font-mono text-[11px] font-semibold tabular-nums text-slate-600 dark:text-slate-300">
+                    {seg.pct}%
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
+        )}
+      </section>
 
-          {dailySeries.length === 0 ? (
-            <div className="mt-8 flex h-44 flex-col items-center justify-center rounded-lg border border-dashed border-slate-200 text-center dark:border-slate-800">
-              <p className="text-sm text-slate-500 dark:text-slate-400">
-                {language === "en"
-                  ? "No transactions recorded for this view."
-                  : "Belum ada transaksi pada dompet atau bulan ini."}
-              </p>
-              <button
-                type="button"
-                onClick={() => onOpenNewTx("expense")}
-                className="mt-3 text-sm font-medium text-emerald-600 hover:underline cursor-pointer"
+      {/* Recent Transactions (Transaksi Terakhir) */}
+      <section className="glass-panel rounded-3xl p-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
+            {language === "en" ? "Recent Transactions" : "Transaksi terakhir"}
+          </h3>
+          <button
+            type="button"
+            onClick={() => onNavigate("transactions")}
+            className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 underline-offset-2 hover:underline dark:text-emerald-400 whitespace-nowrap cursor-pointer"
+          >
+            <span>{language === "en" ? "View all" : "Lihat semua"}</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+
+        <div className="mt-3 divide-y divide-white/55 dark:divide-white/10">
+          {scopedTxs.slice(0, 5).map((tx) => {
+            const catColor = getCategoryColor(tx.category, customCategories);
+            return (
+              <div
+                key={tx.id}
+                className="flex items-center justify-between gap-3 py-2.5"
               >
-                {language === "en" ? "Log first entry" : "Catat transaksi pertama"}
-              </button>
-            </div>
-          ) : (
-            <div className="mt-6">
-              <div className="flex h-44 items-end justify-between gap-3 border-b border-slate-100 pb-3 dark:border-slate-800">
-                {dailySeries.map((day) => {
-                  const incHeight = Math.max(
-                    day.income > 0 ? 6 : 0,
-                    Math.round((day.income / maxDailyChart) * 100)
-                  );
-                  const expHeight = Math.max(
-                    day.expense > 0 ? 6 : 0,
-                    Math.round((day.expense / maxDailyChart) * 100)
-                  );
-                  return (
-                    <div
-                      key={day.date}
-                      className="group flex h-full flex-1 flex-col items-center justify-end gap-2"
-                      title={
-                        privacyMode
-                          ? formatShortDate(day.date, language)
-                          : `${formatShortDate(day.date, language)}: +${formatCurrency(day.income, currency)} / -${formatCurrency(day.expense, currency)}`
-                      }
-                    >
-                      <div className="flex h-full w-full max-w-[52px] items-end justify-center gap-1.5">
-                        <div
-                          className="w-1/2 rounded-t-sm bg-emerald-500 transition-opacity group-hover:opacity-85"
-                          style={{ height: `${incHeight}%` }}
-                        />
-                        <div
-                          className="w-1/2 rounded-t-sm bg-slate-800 transition-opacity group-hover:opacity-85 dark:bg-slate-300"
-                          style={{ height: `${expHeight}%` }}
-                        />
-                      </div>
-                    </div>
-                  );
-                })}
+                <div className="flex min-w-0 items-center gap-2.5">
+                  <div
+                    className="glass-soft flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-slate-700 dark:text-slate-200"
+                    style={{ color: catColor }}
+                  >
+                    <CategoryIcon category={tx.category} className="h-4 w-4" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="truncate text-xs font-bold text-[#241F35] dark:text-slate-100">
+                      {tx.merchant}
+                    </p>
+                    <p className="truncate text-[11px] text-slate-500 dark:text-slate-400">
+                      {getCategoryLabel(tx.category, language, customCategories)} ·{" "}
+                      {walletMap[tx.walletId] ?? "Dompet"} ·{" "}
+                      {formatShortDate(tx.date, language)}
+                    </p>
+                  </div>
+                </div>
+
+                <p
+                  className={`shrink-0 font-mono text-xs font-bold tabular-nums ${
+                    tx.type === "income"
+                      ? "text-emerald-600 dark:text-emerald-400"
+                      : "text-rose-600 dark:text-rose-400"
+                  }`}
+                >
+                  {tx.type === "income" ? "+" : "-"}
+                  {formatCurrency(tx.amount, currency, privacyMode)}
+                </p>
               </div>
-              <div className="mt-2.5 flex justify-between gap-3">
-                {dailySeries.map((day) => (
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 2x2 Frosted Glass KPI Strip */}
+      <section
+        aria-label="Ringkasan Metrik Utama"
+        className="grid grid-cols-2 gap-3"
+      >
+        <div className="glass-panel rounded-3xl p-4">
+          <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+            {language === "en" ? "Total Net Balance" : "Total Saldo"}
+          </p>
+          <p className="mt-1.5 font-mono text-base font-bold tabular-nums text-[#241F35] dark:text-slate-100 truncate">
+            {formatCurrency(totalNetWorth, currency, privacyMode)}
+          </p>
+          <p className="mt-1 text-[10px] text-slate-500 dark:text-slate-400">
+            {wallets.length} {language === "en" ? "wallets" : "dompet aktif"}
+          </p>
+        </div>
+
+        <div className="glass-panel rounded-3xl p-4">
+          <div className="flex items-center justify-between">
+            <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+              {language === "en" ? "Monthly Income" : "Pemasukan"}
+            </p>
+            <ArrowDownLeft className="h-3.5 w-3.5 text-emerald-600 dark:text-emerald-400" />
+          </div>
+          <p className="mt-1.5 font-mono text-base font-bold tabular-nums text-emerald-700 dark:text-emerald-400 truncate">
+            {formatCurrency(monthlyIncome, currency, privacyMode)}
+          </p>
+          <p className="mt-1 font-mono text-[10px] tabular-nums text-slate-500 dark:text-slate-400">
+            {language === "en" ? "Saved" : "Nabung"} {savingsRate}%
+          </p>
+        </div>
+
+        <div className="glass-panel rounded-3xl p-4">
+          <div className="flex items-center justify-between">
+            <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+              {language === "en" ? "Monthly Expense" : "Pengeluaran"}
+            </p>
+            <ArrowUpRight className="h-3.5 w-3.5 text-rose-600 dark:text-rose-400" />
+          </div>
+          <p className="mt-1.5 font-mono text-base font-bold tabular-nums text-[#241F35] dark:text-slate-100 truncate">
+            {formatCurrency(monthlyExpense, currency, privacyMode)}
+          </p>
+          <p className="mt-1 font-mono text-[10px] tabular-nums text-slate-500 dark:text-slate-400 truncate">
+            {language === "en" ? "Cap" : "Batas"}{" "}
+            {formatCurrency(totalMonthlyBudget, currency, privacyMode)}
+          </p>
+        </div>
+
+        <div className="glass-panel rounded-3xl p-4">
+          <p className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+            {language === "en" ? "Safe Daily Limit" : "Jatah Harian"}
+          </p>
+          <p className="mt-1.5 font-mono text-base font-bold tabular-nums text-[#241F35] dark:text-slate-100 truncate">
+            {formatCurrency(dailySafeLimit, currency, privacyMode)}
+          </p>
+          <p className="mt-1 text-[10px] text-slate-500 dark:text-slate-400 truncate">
+            {remainingBudget >= 0
+              ? language === "en"
+                ? "Under budget"
+                : "Aman di bawah batas"
+              : language === "en"
+                ? "Over budget"
+                : "Melebihi batas"}
+          </p>
+        </div>
+      </section>
+
+      {/* Category Budget Progress */}
+      <section className="glass-panel rounded-3xl p-4">
+        <div className="flex items-center justify-between">
+          <h3 className="font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
+            {language === "en" ? "Top Category Budgets" : "Pantauan Budget Kategori"}
+          </h3>
+          <button
+            type="button"
+            onClick={() => onNavigate("budgets")}
+            className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-700 hover:underline dark:text-emerald-400 whitespace-nowrap cursor-pointer"
+          >
+            <span>{language === "en" ? "Manage" : "Atur"}</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        </div>
+
+        <div className="mt-3.5 space-y-3">
+          {budgets.slice(0, 4).map((b) => {
+            const spent = categorySpendMap[b.category] ?? 0;
+            const pct = b.monthlyLimit > 0 ? Math.round((spent / b.monthlyLimit) * 100) : 0;
+            const clamped = Math.min(100, pct);
+            const isOver = pct > 100;
+            const isWarn = pct >= 80 && !isOver;
+
+            return (
+              <div key={b.category} className="space-y-1">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="font-medium text-slate-800 dark:text-slate-200">
+                    {getCategoryLabel(b.category, language, customCategories)}
+                  </span>
+                  <span className="font-mono text-[11px] tabular-nums text-slate-600 dark:text-slate-400">
+                    {formatCurrency(spent, currency, privacyMode)} /{" "}
+                    {formatCurrency(b.monthlyLimit, currency, privacyMode)}
+                  </span>
+                </div>
+                <div className="h-2 w-full overflow-hidden rounded-full bg-white/60 dark:bg-slate-800">
+                  <div
+                    className={`h-full rounded-full transition-all ${
+                      isOver
+                        ? "bg-rose-600"
+                        : isWarn
+                          ? "bg-amber-500"
+                          : "bg-emerald-500"
+                    }`}
+                    style={{ width: `${clamped}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Daily Cashflow Bar Chart */}
+      <section className="glass-panel rounded-3xl p-4">
+        <div className="flex items-center justify-between gap-2">
+          <div>
+            <h3 className="font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
+              {language === "en"
+                ? "Recent Activity Cashflow"
+                : "Arus Kas Aktivitas Terakhir"}
+            </h3>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400">
+              {language === "en"
+                ? "Income vs Expense daily"
+                : "Pemasukan vs pengeluaran harian"}
+            </p>
+          </div>
+          <div className="flex items-center gap-2.5 text-[11px] text-slate-600 dark:text-slate-400 shrink-0">
+            <span className="inline-flex items-center gap-1">
+              <span className="h-2 w-2 rounded-xs bg-emerald-500" />
+              {language === "en" ? "In" : "Masuk"}
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <span className="h-2 w-2 rounded-xs bg-slate-800 dark:bg-slate-300" />
+              {language === "en" ? "Out" : "Keluar"}
+            </span>
+          </div>
+        </div>
+
+        {dailySeries.length === 0 ? (
+          <div className="mt-4 flex h-36 flex-col items-center justify-center rounded-2xl border border-dashed border-white/70 text-center dark:border-slate-800">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
+              {language === "en"
+                ? "No transactions recorded for this view."
+                : "Belum ada transaksi pada dompet atau bulan ini."}
+            </p>
+            <button
+              type="button"
+              onClick={() => onOpenNewTx("expense")}
+              className="mt-2 text-xs font-semibold text-emerald-600 hover:underline cursor-pointer"
+            >
+              {language === "en" ? "Log first entry" : "Catat transaksi pertama"}
+            </button>
+          </div>
+        ) : (
+          <div className="mt-4">
+            <div className="flex h-36 items-end justify-between gap-2 border-b border-white/55 pb-2.5 dark:border-slate-800">
+              {dailySeries.map((day) => {
+                const incHeight = Math.max(
+                  day.income > 0 ? 6 : 0,
+                  Math.round((day.income / maxDailyChart) * 100)
+                );
+                const expHeight = Math.max(
+                  day.expense > 0 ? 6 : 0,
+                  Math.round((day.expense / maxDailyChart) * 100)
+                );
+                return (
                   <div
                     key={day.date}
-                    className="flex-1 text-center font-mono text-xs tabular-nums text-slate-500 dark:text-slate-400"
+                    className="group flex h-full flex-1 flex-col items-center justify-end gap-1.5"
+                    title={
+                      privacyMode
+                        ? formatShortDate(day.date, language)
+                        : `${formatShortDate(day.date, language)}: +${formatCurrency(day.income, currency)} / -${formatCurrency(day.expense, currency)}`
+                    }
                   >
-                    Tgl {day.label}
+                    <div className="flex h-full w-full max-w-[36px] items-end justify-center gap-1">
+                      <div
+                        className="w-1/2 rounded-t-sm bg-emerald-500 transition-opacity group-hover:opacity-85"
+                        style={{ height: `${incHeight}%` }}
+                      />
+                      <div
+                        className="w-1/2 rounded-t-sm bg-slate-800 transition-opacity group-hover:opacity-85 dark:bg-slate-300"
+                        style={{ height: `${expHeight}%` }}
+                      />
+                    </div>
                   </div>
-                ))}
-              </div>
+                );
+              })}
             </div>
-          )}
-        </section>
-      </div>
+            <div className="mt-2 flex justify-between gap-2">
+              {dailySeries.map((day) => (
+                <div
+                  key={day.date}
+                  className="flex-1 text-center font-mono text-[10px] tabular-nums text-slate-500 dark:text-slate-400"
+                >
+                  {day.label}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </section>
 
       {/* AI Spending Trend Tip */}
       <SpendingTrendTip
@@ -681,87 +854,77 @@ export function OverviewView({
       />
 
       {/* Recharts Monthly Spending Trend vs Previous Month */}
-      <section className="glass-panel rounded-3xl p-6">
-        <div className="flex flex-col gap-3 border-b border-white/60 pb-4 dark:border-white/10 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <div className="flex flex-wrap items-center gap-2">
-              <h3 className="font-display text-base font-semibold text-slate-900 dark:text-slate-100">
-                {language === "en"
-                  ? "Monthly Spending Trend vs Previous Month"
-                  : "Tren Pengeluaran Bulanan vs Bulan Lalu"}
-              </h3>
-              {prevMonthSpendTotal > 0 && (
-                <span
-                  className={`inline-flex items-center gap-1 text-xs font-semibold ${
-                    trendDeltaPct <= 0
-                      ? "text-emerald-700 dark:text-emerald-400"
-                      : "text-rose-600 dark:text-rose-400"
-                  }`}
-                >
-                  {trendDeltaPct <= 0 ? (
-                    <TrendingDown className="h-3.5 w-3.5" />
-                  ) : (
-                    <TrendingUp className="h-3.5 w-3.5" />
-                  )}
-                  <span className="font-mono tabular-nums">
-                    {trendDeltaPct > 0 ? `+${trendDeltaPct}%` : `${trendDeltaPct}%`}
-                  </span>
-                  <span>
-                    {trendDeltaPct <= 0
-                      ? language === "en"
-                        ? "lower"
-                        : "lebih hemat"
-                      : language === "en"
-                        ? "higher"
-                        : "lebih tinggi"}
-                  </span>
+      <section className="glass-panel rounded-3xl p-4">
+        <div className="flex flex-col gap-2.5 border-b border-white/55 pb-3 dark:border-white/10">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h3 className="font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
+              {language === "en"
+                ? "Spending Trend vs Last Month"
+                : "Tren Pengeluaran vs Bulan Lalu"}
+            </h3>
+            {prevMonthSpendTotal > 0 && (
+              <span
+                className={`inline-flex items-center gap-1 text-[11px] font-semibold ${
+                  trendDeltaPct <= 0
+                    ? "text-emerald-700 dark:text-emerald-400"
+                    : "text-rose-600 dark:text-rose-400"
+                }`}
+              >
+                {trendDeltaPct <= 0 ? (
+                  <TrendingDown className="h-3 w-3" />
+                ) : (
+                  <TrendingUp className="h-3 w-3" />
+                )}
+                <span className="font-mono tabular-nums">
+                  {trendDeltaPct > 0 ? `+${trendDeltaPct}%` : `${trendDeltaPct}%`}
                 </span>
-              )}
-            </div>
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              <span>{formatMonthLabel(selectedMonth, language)}: </span>
-              <span className="font-mono font-semibold tabular-nums text-slate-800 dark:text-slate-200">
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+              <span className="font-mono font-semibold text-slate-800 dark:text-slate-200">
                 {formatCurrency(currentMonthSpendTotal, currency, privacyMode)}
               </span>
-              <span aria-hidden="true"> · </span>
-              <span>{formatMonthLabel(prevMonthKey, language)}: </span>
-              <span className="font-mono font-semibold tabular-nums text-slate-700 dark:text-slate-300">
+              <span> vs </span>
+              <span className="font-mono font-semibold text-slate-600 dark:text-slate-300">
                 {formatCurrency(prevMonthSpendTotal, currency, privacyMode)}
               </span>
             </p>
-          </div>
 
-          <div className="glass-soft flex items-center gap-1 self-start rounded-xl p-1">
-            <button
-              type="button"
-              onClick={() => setTrendMode("cumulative")}
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                trendMode === "cumulative"
-                  ? "bg-[#241F35] text-white shadow-xs dark:bg-emerald-600"
-                  : "text-slate-600 hover:text-slate-900 dark:text-slate-300"
-              }`}
-            >
-              {language === "en" ? "Cumulative" : "Kumulatif"}
-            </button>
-            <button
-              type="button"
-              onClick={() => setTrendMode("daily")}
-              className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                trendMode === "daily"
-                  ? "bg-[#241F35] text-white shadow-xs dark:bg-emerald-600"
-                  : "text-slate-600 hover:text-slate-900 dark:text-slate-300"
-              }`}
-            >
-              {language === "en" ? "Daily" : "Harian"}
-            </button>
+            <div className="glass-soft flex items-center gap-1 rounded-xl p-0.5 shrink-0">
+              <button
+                type="button"
+                onClick={() => setTrendMode("cumulative")}
+                className={`rounded-lg px-2.5 py-1 text-[10px] font-semibold transition-all whitespace-nowrap cursor-pointer ${
+                  trendMode === "cumulative"
+                    ? "bg-[#241F35] text-white shadow-xs dark:bg-emerald-600"
+                    : "text-slate-600 dark:text-slate-300"
+                }`}
+              >
+                {language === "en" ? "Cumulative" : "Kumulatif"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setTrendMode("daily")}
+                className={`rounded-lg px-2.5 py-1 text-[10px] font-semibold transition-all whitespace-nowrap cursor-pointer ${
+                  trendMode === "daily"
+                    ? "bg-[#241F35] text-white shadow-xs dark:bg-emerald-600"
+                    : "text-slate-600 dark:text-slate-300"
+                }`}
+              >
+                {language === "en" ? "Daily" : "Harian"}
+              </button>
+            </div>
           </div>
         </div>
 
-        <div className="mt-5 h-72 w-full">
+        <div className="mt-4 h-56 w-full">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart
               data={trendData}
-              margin={{ top: 8, right: 16, left: 4, bottom: 4 }}
+              margin={{ top: 8, right: 8, left: -12, bottom: 4 }}
             >
               <CartesianGrid
                 strokeDasharray="4 4"
@@ -770,17 +933,17 @@ export function OverviewView({
               />
               <XAxis
                 dataKey="dayLabel"
-                tick={{ fontSize: 11, fill: "#64748B" }}
+                tick={{ fontSize: 10, fill: "#64748B" }}
                 axisLine={false}
                 tickLine={false}
-                interval={2}
-                tickFormatter={(val) => `${language === "en" ? "D" : "Tgl "}${val}`}
+                interval={4}
+                tickFormatter={(val) => `${val}`}
               />
               <YAxis
-                tick={{ fontSize: 11, fill: "#64748B" }}
+                tick={{ fontSize: 10, fill: "#64748B" }}
                 axisLine={false}
                 tickLine={false}
-                width={52}
+                width={48}
                 tickFormatter={(val: number) =>
                   formatAxisCompact(val, currency, privacyMode)
                 }
@@ -789,15 +952,15 @@ export function OverviewView({
                 content={({ active, payload, label }) => {
                   if (!active || !payload || payload.length === 0) return null;
                   return (
-                    <div className="glass-modal rounded-2xl px-3.5 py-2.5 text-xs shadow-lg">
+                    <div className="glass-modal rounded-2xl px-3 py-2 text-xs shadow-lg">
                       <p className="font-display font-semibold text-[#241F35] dark:text-slate-100">
                         {language === "en" ? `Day ${label}` : `Tanggal ${label}`}
                       </p>
-                      <div className="mt-1.5 space-y-1">
+                      <div className="mt-1 space-y-1">
                         {payload.map((entry) => (
                           <div
                             key={String(entry.dataKey)}
-                            className="flex items-center justify-between gap-4"
+                            className="flex items-center justify-between gap-3"
                           >
                             <span
                               className="font-medium"
@@ -819,24 +982,22 @@ export function OverviewView({
                   );
                 }}
               />
-              <Legend
-                wrapperStyle={{ fontSize: "12px", paddingTop: "8px" }}
-              />
+              <Legend wrapperStyle={{ fontSize: "11px", paddingTop: "6px" }} />
               <Line
                 type="monotone"
                 dataKey="current"
                 name={formatMonthLabel(selectedMonth, language)}
                 stroke="#10B981"
-                strokeWidth={3}
+                strokeWidth={2.5}
                 dot={false}
-                activeDot={{ r: 5, fill: "#10B981", stroke: "#FFFFFF", strokeWidth: 2 }}
+                activeDot={{ r: 4, fill: "#10B981", stroke: "#FFFFFF", strokeWidth: 2 }}
               />
               <Line
                 type="monotone"
                 dataKey="previous"
                 name={formatMonthLabel(prevMonthKey, language)}
                 stroke="#A78BFA"
-                strokeWidth={2.5}
+                strokeWidth={2}
                 strokeDasharray="6 4"
                 dot={false}
                 activeDot={{ r: 4, fill: "#A78BFA", stroke: "#FFFFFF", strokeWidth: 2 }}
@@ -846,238 +1007,122 @@ export function OverviewView({
         </div>
       </section>
 
-      {/* Category Budget Progress + Recent Transactions + Right Cards */}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
-        <section className="glass-panel rounded-3xl p-6 lg:col-span-7">
-          <div className="flex items-center justify-between">
-            <h3 className="font-display text-base font-semibold text-slate-900 dark:text-slate-100">
-              {language === "en" ? "Recent Transactions" : "Transaksi Terbaru"}
-            </h3>
-            <button
-              type="button"
-              onClick={() => onNavigate("transactions")}
-              className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 hover:underline dark:text-emerald-400 whitespace-nowrap cursor-pointer"
+      {/* Cuan Performance Card */}
+      <section className="glass-panel rounded-3xl p-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+            <Award className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
+            <span>Cuan Performance</span>
+          </div>
+          <span className="font-mono text-xs font-bold tabular-nums text-emerald-700 dark:text-emerald-400">
+            {savingsRate}% {language === "en" ? "saved" : "tertabung"}
+          </span>
+        </div>
+        <div className="mt-2.5 divide-y divide-white/55 dark:divide-white/10">
+          {cuanAchievements.map((item) => (
+            <div
+              key={item.label}
+              className="flex items-center justify-between py-2 text-xs"
             >
-              <span>{language === "en" ? "View all" : "Lihat semua"}</span>
-              <ArrowRight className="h-3.5 w-3.5" />
-            </button>
-          </div>
-
-          <div className="mt-4 divide-y divide-white/60 dark:divide-white/10">
-            {scopedTxs.slice(0, 6).map((tx) => {
-              const catColor = getCategoryColor(tx.category, customCategories);
-              return (
-                <div
-                  key={tx.id}
-                  className="flex items-center justify-between gap-4 py-3"
-                >
-                  <div className="flex min-w-0 items-center gap-3">
-                    <div
-                      className="glass-soft flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-slate-700 dark:text-slate-200"
-                      style={{ color: catColor }}
-                    >
-                      <CategoryIcon category={tx.category} className="h-4 w-4" />
-                    </div>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-slate-900 dark:text-slate-100">
-                        {tx.merchant}
-                      </p>
-                      <p className="truncate text-xs text-slate-500 dark:text-slate-400">
-                        {getCategoryLabel(tx.category, language, customCategories)} ·{" "}
-                        {walletMap[tx.walletId] ?? "Dompet"} ·{" "}
-                        {formatShortDate(tx.date, language)}
-                      </p>
-                    </div>
-                  </div>
-
-                  <p
-                    className={`shrink-0 font-mono text-sm font-medium tabular-nums ${
-                      tx.type === "income"
-                        ? "text-emerald-600 dark:text-emerald-400"
-                        : "text-slate-900 dark:text-slate-100"
-                    }`}
-                  >
-                    {tx.type === "income" ? "+" : "-"}
-                    {formatCurrency(tx.amount, currency, privacyMode)}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="space-y-4 lg:col-span-5">
-          {/* Category Budget Progress */}
-          <div className="glass-panel rounded-3xl p-5">
-            <div className="flex items-center justify-between">
-              <h3 className="font-display text-base font-semibold text-slate-900 dark:text-slate-100">
-                {language === "en" ? "Top Category Budgets" : "Pantauan Budget Kategori"}
-              </h3>
-              <button
-                type="button"
-                onClick={() => onNavigate("budgets")}
-                className="inline-flex items-center gap-1 text-xs font-medium text-emerald-700 hover:underline dark:text-emerald-400 whitespace-nowrap cursor-pointer"
+              <span className="text-slate-700 dark:text-slate-300">
+                {item.label}
+              </span>
+              <span
+                className={
+                  item.achieved
+                    ? "font-semibold text-emerald-700 dark:text-emerald-400"
+                    : "text-slate-400"
+                }
               >
-                <span>{language === "en" ? "Manage" : "Atur"}</span>
-                <ArrowRight className="h-3.5 w-3.5" />
-              </button>
-            </div>
-
-            <div className="mt-4 space-y-3.5">
-              {budgets.slice(0, 4).map((b) => {
-                const spent = categorySpendMap[b.category] ?? 0;
-                const pct = b.monthlyLimit > 0 ? Math.round((spent / b.monthlyLimit) * 100) : 0;
-                const clamped = Math.min(100, pct);
-                const isOver = pct > 100;
-                const isWarn = pct >= 80 && !isOver;
-
-                return (
-                  <div key={b.category} className="space-y-1">
-                    <div className="flex items-center justify-between text-xs">
-                      <span className="font-medium text-slate-800 dark:text-slate-200">
-                        {getCategoryLabel(b.category, language, customCategories)}
-                      </span>
-                      <span className="font-mono tabular-nums text-slate-600 dark:text-slate-400">
-                        {formatCurrency(spent, currency, privacyMode)} /{" "}
-                        {formatCurrency(b.monthlyLimit, currency, privacyMode)}
-                      </span>
-                    </div>
-                    <div className="h-2 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800">
-                      <div
-                        className={`h-full rounded-full transition-all ${
-                          isOver
-                            ? "bg-rose-600"
-                            : isWarn
-                              ? "bg-amber-500"
-                              : "bg-emerald-500"
-                        }`}
-                        style={{ width: `${clamped}%` }}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Cuan Performance Card */}
-          <div className="glass-panel rounded-3xl p-5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
-                <Award className="h-4 w-4 text-emerald-600 dark:text-emerald-400" />
-                <span>Cuan Performance</span>
-              </div>
-              <span className="font-mono text-xs font-semibold tabular-nums text-emerald-700 dark:text-emerald-400">
-                {savingsRate}% {language === "en" ? "saved" : "tertabung"}
+                {item.achieved
+                  ? language === "en"
+                    ? "Unlocked"
+                    : "Tercapai"
+                  : language === "en"
+                    ? "In progress"
+                    : "Proses"}
               </span>
             </div>
-            <div className="mt-3 divide-y divide-white/60 dark:divide-white/10">
-              {cuanAchievements.map((item) => (
-                <div
-                  key={item.label}
-                  className="flex items-center justify-between py-2 text-xs"
-                >
-                  <span className="text-slate-700 dark:text-slate-300">
-                    {item.label}
-                  </span>
-                  <span
-                    className={
-                      item.achieved
-                        ? "font-medium text-emerald-700 dark:text-emerald-400"
-                        : "text-slate-400"
-                    }
-                  >
-                    {item.achieved
-                      ? language === "en"
-                        ? "Unlocked"
-                        : "Tercapai"
-                      : language === "en"
-                        ? "In progress"
-                        : "Proses"}
-                  </span>
-                </div>
-              ))}
+          ))}
+        </div>
+      </section>
+
+      {/* Dream Sticky Note Preview */}
+      {activeDream && (
+        <section className="rounded-3xl border border-white/75 bg-[#FEFCE8]/55 p-4 shadow-[0_10px_28px_-12px_rgba(42,31,74,0.1)] backdrop-blur-2xl dark:border-amber-800/40 dark:bg-[#1E1B10]/65">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs font-semibold text-amber-800 dark:text-amber-300">
+              <Target className="h-4 w-4" />
+              <span>{language === "en" ? "Dream Sticky" : "Catatan Impian"}</span>
             </div>
+            <button
+              type="button"
+              onClick={() => onNavigate("dreams")}
+              className="text-xs font-semibold text-amber-900 hover:underline dark:text-amber-300 whitespace-nowrap cursor-pointer"
+            >
+              {language === "en" ? "Open Board" : "Buka Papan"}
+            </button>
           </div>
-
-          {/* Dream Sticky Note Preview */}
-          {activeDream && (
-            <div className="rounded-3xl border border-white/85 bg-[#FEFCE8]/75 p-5 shadow-[0_10px_28px_-12px_rgba(42,31,74,0.1)] backdrop-blur-xl dark:border-amber-800/40 dark:bg-[#1E1B10]/75">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-medium text-amber-800 dark:text-amber-300">
-                  <Target className="h-4 w-4" />
-                  <span>{language === "en" ? "Dream Sticky" : "Catatan Impian"}</span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => onNavigate("dreams")}
-                  className="text-xs font-medium text-amber-900 hover:underline dark:text-amber-300 whitespace-nowrap cursor-pointer"
-                >
-                  {language === "en" ? "Open Board" : "Buka Papan"}
-                </button>
-              </div>
-              <h4 className="mt-2 font-display text-base font-semibold text-slate-900 dark:text-slate-100">
-                {activeDream.title}
-              </h4>
-              <div className="mt-2.5 flex items-baseline justify-between font-mono text-xs tabular-nums">
-                <span className="font-semibold text-emerald-800 dark:text-emerald-400">
-                  {formatCurrency(activeDream.currentAmount, currency, privacyMode)}
-                </span>
-                <span className="text-slate-600 dark:text-slate-400">
-                  / {formatCurrency(activeDream.targetAmount, currency, privacyMode)}
-                </span>
-              </div>
-              <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-amber-200/70 dark:bg-slate-800">
-                <div
-                  className="h-full rounded-full bg-emerald-600"
-                  style={{
-                    width: `${Math.min(
-                      100,
-                      Math.round(
-                        (activeDream.currentAmount / activeDream.targetAmount) * 100
-                      )
-                    )}%`,
-                  }}
-                />
-              </div>
-            </div>
-          )}
-
-          {activeChallenge && (
-            <div className="glass-panel rounded-3xl p-5">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2 text-xs font-medium text-slate-500 dark:text-slate-400">
-                  <Flame className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                  <span>
-                    {language === "en" ? "Active Challenge" : "Tantangan Hemat Aktif"}
-                  </span>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => onNavigate("budgets")}
-                  className="text-xs font-medium text-emerald-700 hover:underline dark:text-emerald-400 whitespace-nowrap cursor-pointer"
-                >
-                  Check-in
-                </button>
-              </div>
-              <h4 className="mt-2 font-display text-base font-semibold text-slate-900 dark:text-slate-100">
-                {activeChallenge.title}
-              </h4>
-              <div className="mt-2.5 flex items-center justify-between font-mono text-xs tabular-nums text-slate-600 dark:text-slate-300">
-                <span>
-                  {activeChallenge.completedDays} / {activeChallenge.targetDays}{" "}
-                  {language === "en" ? "days" : "hari"}
-                </span>
-                <span className="text-emerald-700 dark:text-emerald-400">
-                  +{formatCurrency(activeChallenge.estimatedSaving, currency, privacyMode)}
-                </span>
-              </div>
-            </div>
-          )}
+          <h4 className="mt-1.5 font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
+            {activeDream.title}
+          </h4>
+          <div className="mt-2 flex items-baseline justify-between font-mono text-xs tabular-nums">
+            <span className="font-bold text-emerald-800 dark:text-emerald-400">
+              {formatCurrency(activeDream.currentAmount, currency, privacyMode)}
+            </span>
+            <span className="text-slate-600 dark:text-slate-400">
+              / {formatCurrency(activeDream.targetAmount, currency, privacyMode)}
+            </span>
+          </div>
+          <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-amber-200/65 dark:bg-slate-800">
+            <div
+              className="h-full rounded-full bg-emerald-600"
+              style={{
+                width: `${Math.min(
+                  100,
+                  Math.round(
+                    (activeDream.currentAmount / activeDream.targetAmount) * 100
+                  )
+                )}%`,
+              }}
+            />
+          </div>
         </section>
-      </div>
+      )}
 
-      {/* Achievement Badges (Transaction Frequency & Savings Milestones) */}
+      {activeChallenge && (
+        <section className="glass-panel rounded-3xl p-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 dark:text-slate-300">
+              <Flame className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+              <span>
+                {language === "en" ? "Active Challenge" : "Tantangan Hemat Aktif"}
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => onNavigate("budgets")}
+              className="text-xs font-semibold text-emerald-700 hover:underline dark:text-emerald-400 whitespace-nowrap cursor-pointer"
+            >
+              Check-in
+            </button>
+          </div>
+          <h4 className="mt-1.5 font-display text-sm font-bold text-[#241F35] dark:text-slate-100">
+            {activeChallenge.title}
+          </h4>
+          <div className="mt-2 flex items-center justify-between font-mono text-xs tabular-nums text-slate-600 dark:text-slate-300">
+            <span>
+              {activeChallenge.completedDays} / {activeChallenge.targetDays}{" "}
+              {language === "en" ? "days" : "hari"}
+            </span>
+            <span className="font-semibold text-emerald-700 dark:text-emerald-400">
+              +{formatCurrency(activeChallenge.estimatedSaving, currency, privacyMode)}
+            </span>
+          </div>
+        </section>
+      )}
+
+      {/* Achievement Badges */}
       <Badges
         transactions={transactions}
         wallets={wallets}
