@@ -1,20 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  CalendarDays,
-  Camera,
-  Eye,
-  EyeOff,
-  LayoutDashboard,
-  ListOrdered,
-  Moon,
-  PiggyBank,
-  Plus,
-  RotateCcw,
-  Settings,
-  Sun,
-  Target,
-  Wallet as WalletIcon,
-} from "lucide-react";
+import { Eye, EyeOff, Plus, Settings } from "lucide-react";
 import {
   AppThemeMode,
   AutoTransferRule,
@@ -334,72 +319,6 @@ export default function App() {
     companionName,
     companionAvatarUrl,
   } = state;
-
-  const navItems: Array<{
-    id: TabId;
-    labelId: string;
-    labelEn: string;
-    mobileLabelId: string;
-    mobileLabelEn: string;
-    icon: typeof LayoutDashboard;
-  }> = [
-    {
-      id: "overview",
-      labelId: "Ringkasan",
-      labelEn: "Overview",
-      mobileLabelId: "Ringkas",
-      mobileLabelEn: "Home",
-      icon: LayoutDashboard,
-    },
-    {
-      id: "transactions",
-      labelId: "Transaksi",
-      labelEn: "Transactions",
-      mobileLabelId: "Catatan",
-      mobileLabelEn: "Ledger",
-      icon: ListOrdered,
-    },
-    {
-      id: "calendar",
-      labelId: "Kalender",
-      labelEn: "Calendar",
-      mobileLabelId: "Kalender",
-      mobileLabelEn: "Calendar",
-      icon: CalendarDays,
-    },
-    {
-      id: "scanner",
-      labelId: "Scan Struk AI",
-      labelEn: "AI Scanner",
-      mobileLabelId: "Scan AI",
-      mobileLabelEn: "Scan",
-      icon: Camera,
-    },
-    {
-      id: "budgets",
-      labelId: "Budget & Hutang",
-      labelEn: "Budgets & Debts",
-      mobileLabelId: "Budget",
-      mobileLabelEn: "Budget",
-      icon: PiggyBank,
-    },
-    {
-      id: "dreams",
-      labelId: "Impian & Aset",
-      labelEn: "Dreams & Assets",
-      mobileLabelId: "Impian",
-      mobileLabelEn: "Dreams",
-      icon: Target,
-    },
-    {
-      id: "wallets",
-      labelId: "Dompet & Audit",
-      labelEn: "Wallets & AI",
-      mobileLabelId: "Dompet",
-      mobileLabelEn: "Wallets",
-      icon: WalletIcon,
-    },
-  ];
 
   const openTransactionModal = (
     defaultType: TransactionType = "expense",
@@ -845,8 +764,6 @@ export default function App() {
     setSelectedWalletFilter("all");
   };
 
-  const currentNav = navItems.find((n) => n.id === activeTab) ?? navItems[0];
-
   const shellCanvasClass =
     appTheme === "dark"
       ? "bg-[#090D10] text-slate-100"
@@ -854,200 +771,73 @@ export default function App() {
         ? "bg-[#F4F7FB] text-slate-900"
         : appTheme === "bold"
           ? "bg-[#FFF9EB] text-[#241F35]"
-          : "bg-gradient-to-br from-[#F3ECFF] via-[#FCF8FF] to-[#E6FAF0] text-[#241F35]";
+          : "bg-gradient-to-br from-[#EDE1FF] via-[#FFF4FB] to-[#DAF7EA] text-[#241F35]";
 
   return (
-    <div className={`relative min-h-screen ${shellCanvasClass}`}>
+    <div className={`relative min-h-screen overflow-x-hidden ${shellCanvasClass}`}>
       {/* Ambient Soft Pastel Aura for Glassmorphism */}
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
       >
-        <div className="absolute -top-28 -left-24 h-96 w-96 rounded-full bg-[#FFD6EA]/60 blur-3xl dark:bg-emerald-900/20" />
-        <div className="absolute top-1/3 -right-28 h-[28rem] w-[28rem] rounded-full bg-[#CFE7FF]/65 blur-3xl dark:bg-purple-900/20" />
-        <div className="absolute -bottom-24 left-1/3 h-96 w-96 rounded-full bg-[#CFF7E3]/65 blur-3xl dark:bg-sky-900/20" />
+        <div className="absolute -top-24 -left-20 h-80 w-80 rounded-full bg-[#FFBFE2]/65 blur-3xl dark:bg-emerald-900/25" />
+        <div className="absolute top-1/3 -right-24 h-96 w-96 rounded-full bg-[#B9DDFF]/70 blur-3xl dark:bg-purple-900/25" />
+        <div className="absolute -bottom-24 left-1/4 h-80 w-80 rounded-full bg-[#B9F5DA]/70 blur-3xl dark:bg-sky-900/25" />
       </div>
 
-      <div className="relative z-10 flex min-h-screen">
-        {/* Desktop Frosted Glass Sidebar */}
-        <aside className="glass-panel hidden w-64 shrink-0 flex-col justify-between border-r border-white/75 p-5 dark:border-white/10 lg:flex">
-          <div>
-            <div className="flex items-center justify-between px-2 pb-6">
-              <a
-                href="#overview"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveTab("overview");
-                }}
-                className="inline-flex items-center gap-2.5 font-display text-2xl font-bold tracking-tight text-[#241F35] dark:text-white whitespace-nowrap"
-              >
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 36 36"
-                  className="h-8 w-8 shrink-0"
-                >
-                  <circle cx="11" cy="10" r="5" fill="#F9B8D0" />
-                  <circle cx="25" cy="10" r="5" fill="#F9B8D0" />
-                  <rect
-                    x="5"
-                    y="10"
-                    width="26"
-                    height="21"
-                    rx="10.5"
-                    fill="#FFF7FA"
-                    stroke="#241F35"
-                    strokeWidth="2"
-                  />
-                  <circle cx="13.5" cy="19" r="1.7" fill="#241F35" />
-                  <circle cx="22.5" cy="19" r="1.7" fill="#241F35" />
-                  <ellipse cx="10.5" cy="22" rx="2.3" ry="1.2" fill="#FF9EC6" />
-                  <ellipse cx="25.5" cy="22" rx="2.3" ry="1.2" fill="#FF9EC6" />
-                  <path
-                    d="M16 21.5 Q18 23.5 20 21.5"
-                    fill="none"
-                    stroke="#241F35"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-                </svg>
-                <span>Mucuw</span>
-              </a>
-              <button
-                type="button"
-                onClick={() => setIsProfileOpen(true)}
-                title={language === "en" ? "Profile & Theme" : "Profil & Tema"}
-                aria-label="Profil & Pengaturan"
-                className="glass-soft rounded-xl p-1.5 text-slate-600 transition-transform hover:scale-105 hover:text-[#241F35] dark:text-slate-300 cursor-pointer"
-              >
-                <Settings className="h-4 w-4" />
-              </button>
-            </div>
-
-            <nav aria-label="Menu Utama" className="space-y-1.5">
-              {navItems.map((item) => {
-                const Icon = item.icon;
-                const active = activeTab === item.id;
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => setActiveTab(item.id)}
-                    className={`flex w-full items-center gap-3 rounded-2xl px-3.5 py-2.5 text-sm font-semibold transition-all whitespace-nowrap cursor-pointer ${
-                      active
-                        ? "bg-white/85 text-[#241F35] shadow-sm ring-1 ring-[#241F35]/8 dark:bg-emerald-500/20 dark:text-emerald-200 dark:ring-emerald-400/25"
-                        : "text-slate-600 hover:bg-white/50 hover:text-[#241F35] dark:text-slate-300 dark:hover:bg-white/5 dark:hover:text-white"
-                    }`}
-                  >
-                    <Icon className="h-4 w-4 shrink-0" />
-                    <span>{language === "en" ? item.labelEn : item.labelId}</span>
-                  </button>
-                );
-              })}
-            </nav>
-          </div>
-
-          <div className="space-y-2.5 border-t border-white/60 pt-4 dark:border-white/10">
-            <div className="flex items-center justify-between gap-2">
-              <button
-                type="button"
-                onClick={() =>
-                  setState((p) => ({
-                    ...p,
-                    language: p.language === "id" ? "en" : "id",
-                  }))
-                }
-                className="glass-soft flex-1 rounded-xl py-1.5 text-xs font-semibold text-slate-700 transition-transform active:scale-95 dark:text-slate-200 whitespace-nowrap cursor-pointer"
-              >
-                {language === "id" ? "Bahasa: ID" : "Language: EN"}
-              </button>
-              <button
-                type="button"
-                onClick={() =>
-                  setState((p) => ({
-                    ...p,
-                    currency: p.currency === "IDR" ? "USD" : "IDR",
-                  }))
-                }
-                className="glass-soft flex-1 rounded-xl py-1.5 font-mono text-xs font-semibold text-slate-700 transition-transform active:scale-95 dark:text-slate-200 whitespace-nowrap cursor-pointer"
-              >
-                {currency}
-              </button>
-            </div>
-
-            <div className="flex items-center justify-between gap-2">
-              <button
-                type="button"
-                onClick={() =>
-                  setState((p) => ({
-                    ...p,
-                    appTheme: p.appTheme === "dark" ? "pastel" : "dark",
-                  }))
-                }
-                className="glass-soft flex flex-1 items-center justify-center gap-1.5 rounded-xl py-1.5 text-xs font-semibold text-slate-700 transition-transform active:scale-95 dark:text-slate-200 whitespace-nowrap cursor-pointer"
-              >
-                {appTheme === "dark" ? (
-                  <>
-                    <Sun className="h-3.5 w-3.5" />
-                    <span>Pastel</span>
-                  </>
-                ) : (
-                  <>
-                    <Moon className="h-3.5 w-3.5" />
-                    <span>Gelap</span>
-                  </>
-                )}
-              </button>
-              <button
-                type="button"
-                onClick={handleResetDemoData}
-                title={
-                  language === "en" ? "Reset sample data" : "Reset data contoh"
-                }
-                className="glass-soft inline-flex items-center justify-center rounded-xl px-2.5 py-1.5 text-xs text-slate-600 transition-transform active:scale-95 dark:text-slate-300 cursor-pointer"
-              >
-                <RotateCcw className="h-3.5 w-3.5" />
-              </button>
-            </div>
-          </div>
-        </aside>
-
-        {/* Main Workspace */}
-        <div className="flex min-w-0 flex-1 flex-col pb-24 lg:pb-0">
-          {/* Frosted Glass Top Bar */}
-          <header className="sticky top-0 z-30 flex items-center justify-between gap-4 border-b border-white/70 bg-white/60 px-4 py-3.5 backdrop-blur-xl dark:border-white/10 dark:bg-[#0F1619]/70 sm:px-8">
-            <div className="flex min-w-0 items-center gap-3">
-              <span className="font-display text-lg font-bold text-[#241F35] dark:text-white lg:hidden">
-                Mucuw
-              </span>
-              <span className="hidden text-sm font-semibold text-[#241F35] dark:text-slate-100 lg:inline">
-                {language === "en" ? currentNav.labelEn : currentNav.labelId}
-              </span>
-              <span
+      {/* Mobile-Only Centered Frame (Max 430px) */}
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-[430px] flex-col sm:border-x sm:border-white/60 sm:shadow-2xl dark:sm:border-white/10">
+        {/* Clean 2-Row Glass Mobile Header (Zero Overlap) */}
+        <header className="sticky top-0 z-30 border-b border-white/60 bg-white/45 px-4 py-2.5 backdrop-blur-2xl dark:border-white/10 dark:bg-[#0F1619]/65">
+          <div className="flex items-center justify-between gap-2">
+            <a
+              href="#overview"
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab("overview");
+              }}
+              className="inline-flex items-center gap-2 font-display text-lg font-bold tracking-tight text-[#241F35] dark:text-white shrink-0"
+            >
+              <svg
                 aria-hidden="true"
-                className="hidden text-slate-300 dark:text-slate-700 lg:inline"
+                viewBox="0 0 36 36"
+                className="h-7 w-7 shrink-0"
               >
-                /
-              </span>
-              <input
-                type="month"
-                value={selectedMonth}
-                onChange={(e) => setSelectedMonth(e.target.value)}
-                aria-label="Pilih Bulan"
-                className="glass-soft rounded-xl px-2.5 py-1 font-mono text-xs text-[#241F35] outline-none dark:text-slate-200"
-              />
-              <span className="hidden text-xs text-slate-500 dark:text-slate-400 sm:inline">
-                {formatMonthLabel(selectedMonth, language)}
-              </span>
-            </div>
+                <circle cx="11" cy="10" r="5" fill="#F9B8D0" />
+                <circle cx="25" cy="10" r="5" fill="#F9B8D0" />
+                <rect
+                  x="5"
+                  y="10"
+                  width="26"
+                  height="21"
+                  rx="10.5"
+                  fill="#FFF7FA"
+                  stroke="#241F35"
+                  strokeWidth="2"
+                />
+                <circle cx="13.5" cy="19" r="1.7" fill="#241F35" />
+                <circle cx="22.5" cy="19" r="1.7" fill="#241F35" />
+                <ellipse cx="10.5" cy="22" rx="2.3" ry="1.2" fill="#FF9EC6" />
+                <ellipse cx="25.5" cy="22" rx="2.3" ry="1.2" fill="#FF9EC6" />
+                <path
+                  d="M16 21.5 Q18 23.5 20 21.5"
+                  fill="none"
+                  stroke="#241F35"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <span>Mucuw</span>
+            </a>
 
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex items-center gap-1.5 shrink-0">
               <PWAInstallButton language={language} variant="header" />
 
               <button
                 type="button"
                 onClick={() => setIsProfileOpen(true)}
                 aria-label="Profil & Pengaturan"
-                className="glass-soft inline-flex items-center justify-center rounded-xl p-2 text-[#241F35] transition-transform hover:scale-105 dark:text-slate-200 lg:hidden cursor-pointer"
+                className="glass-soft inline-flex items-center justify-center rounded-xl p-2 text-[#241F35] transition-transform active:scale-95 dark:text-slate-200 cursor-pointer"
               >
                 <Settings className="h-4 w-4" />
               </button>
@@ -1057,19 +847,10 @@ export default function App() {
                 onClick={() =>
                   setState((p) => ({ ...p, privacyMode: !p.privacyMode }))
                 }
-                title={
-                  privacyMode
-                    ? language === "en"
-                      ? "Show balances"
-                      : "Tampilkan nominal"
-                    : language === "en"
-                      ? "Hide balances"
-                      : "Sembunyikan nominal"
-                }
                 aria-label={
                   privacyMode ? "Tampilkan nominal" : "Sembunyikan nominal"
                 }
-                className="glass-soft inline-flex items-center justify-center rounded-xl p-2 text-[#241F35] transition-transform hover:scale-105 dark:text-slate-200 cursor-pointer"
+                className="glass-soft inline-flex items-center justify-center rounded-xl p-2 text-[#241F35] transition-transform active:scale-95 dark:text-slate-200 cursor-pointer"
               >
                 {privacyMode ? (
                   <EyeOff className="h-4 w-4" />
@@ -1081,165 +862,176 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => openTransactionModal("expense")}
-                className="inline-flex items-center gap-1.5 rounded-2xl bg-[#241F35] px-4 py-2 text-xs font-semibold text-white shadow-sm transition-transform hover:-translate-y-0.5 active:scale-95 dark:bg-emerald-600 dark:hover:bg-emerald-500 whitespace-nowrap shrink-0 cursor-pointer"
+                className="inline-flex items-center gap-1 rounded-xl bg-[#241F35] px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition-transform active:scale-95 dark:bg-emerald-600 whitespace-nowrap cursor-pointer"
               >
-                <Plus className="h-4 w-4" />
-                <span>
-                  {language === "en" ? "Log Entry" : "Catat Transaksi"}
-                </span>
+                <Plus className="h-3.5 w-3.5" />
+                <span>{language === "en" ? "Add" : "Catat"}</span>
               </button>
             </div>
-          </header>
+          </div>
 
-          {/* Content Container */}
-          <main className="mx-auto w-full max-w-[1200px] flex-1 p-4 sm:p-8">
-            {activeTab === "overview" && (
-              <OverviewView
-                userName={userName}
-                wallets={wallets}
-                selectedWalletFilter={selectedWalletFilter}
-                onSelectWalletFilter={setSelectedWalletFilter}
-                transactions={transactions}
-                budgets={budgets}
-                dreams={dreams}
-                jars={jars}
-                challenges={challenges}
-                customCategories={customCategories}
-                selectedMonth={selectedMonth}
-                currency={currency}
-                language={language}
-                privacyMode={privacyMode}
-                onTogglePrivacy={() =>
-                  setState((p) => ({ ...p, privacyMode: !p.privacyMode }))
-                }
-                widgetTheme={widgetTheme}
-                widgetShape={widgetShape}
-                companionName={companionName}
-                companionAvatarUrl={companionAvatarUrl}
-                onUpdateWidget={handleUpdateWidget}
-                onNavigate={setActiveTab}
-                onOpenNewTx={openTransactionModal}
-                onOpenProfile={() => setIsProfileOpen(true)}
-              />
-            )}
+          <div className="mt-2 flex items-center justify-between gap-2">
+            <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 truncate">
+              {formatMonthLabel(selectedMonth, language)}
+            </span>
+            <input
+              type="month"
+              value={selectedMonth}
+              onChange={(e) => setSelectedMonth(e.target.value)}
+              aria-label="Pilih Bulan"
+              className="glass-soft rounded-xl px-2.5 py-1 font-mono text-[11px] text-[#241F35] outline-none dark:text-slate-200"
+            />
+          </div>
+        </header>
 
-            {activeTab === "transactions" && (
-              <TransactionsView
-                transactions={transactions}
-                wallets={wallets}
-                recurringRules={recurringRules}
-                customCategories={customCategories}
-                selectedMonth={selectedMonth}
-                currency={currency}
-                language={language}
-                privacyMode={privacyMode}
-                autoPostedNotice={autoPostedNotice}
-                onDismissAutoPostedNotice={() => setAutoPostedNotice(null)}
-                onAddTransaction={handleAddTransaction}
-                onDeleteTransaction={handleDeleteTransaction}
-                onAddRecurringRule={handleAddRecurringRule}
-                onToggleRecurringRule={handleToggleRecurringRule}
-                onRunRecurringNow={handleRunRecurringNow}
-                onDeleteRecurringRule={handleDeleteRecurringRule}
-                onOpenModal={() => openTransactionModal("expense")}
-              />
-            )}
+        {/* Mobile Content Container */}
+        <main className="w-full flex-1 px-3.5 pt-3.5 pb-24">
+          {activeTab === "overview" && (
+            <OverviewView
+              userName={userName}
+              wallets={wallets}
+              selectedWalletFilter={selectedWalletFilter}
+              onSelectWalletFilter={setSelectedWalletFilter}
+              transactions={transactions}
+              budgets={budgets}
+              dreams={dreams}
+              jars={jars}
+              challenges={challenges}
+              customCategories={customCategories}
+              selectedMonth={selectedMonth}
+              currency={currency}
+              language={language}
+              privacyMode={privacyMode}
+              onTogglePrivacy={() =>
+                setState((p) => ({ ...p, privacyMode: !p.privacyMode }))
+              }
+              widgetTheme={widgetTheme}
+              widgetShape={widgetShape}
+              companionName={companionName}
+              companionAvatarUrl={companionAvatarUrl}
+              onUpdateWidget={handleUpdateWidget}
+              onNavigate={setActiveTab}
+              onOpenNewTx={openTransactionModal}
+              onOpenProfile={() => setIsProfileOpen(true)}
+            />
+          )}
 
-            {activeTab === "calendar" && (
-              <CalendarView
-                transactions={transactions}
-                wallets={wallets}
-                recurringRules={recurringRules}
-                customCategories={customCategories}
-                selectedMonth={selectedMonth}
-                onSelectMonth={setSelectedMonth}
-                currency={currency}
-                language={language}
-                privacyMode={privacyMode}
-                onDeleteTransaction={handleDeleteTransaction}
-                onOpenNewTx={openTransactionModal}
-              />
-            )}
+          {activeTab === "transactions" && (
+            <TransactionsView
+              transactions={transactions}
+              wallets={wallets}
+              recurringRules={recurringRules}
+              customCategories={customCategories}
+              selectedMonth={selectedMonth}
+              currency={currency}
+              language={language}
+              privacyMode={privacyMode}
+              autoPostedNotice={autoPostedNotice}
+              onDismissAutoPostedNotice={() => setAutoPostedNotice(null)}
+              onAddTransaction={handleAddTransaction}
+              onDeleteTransaction={handleDeleteTransaction}
+              onAddRecurringRule={handleAddRecurringRule}
+              onToggleRecurringRule={handleToggleRecurringRule}
+              onRunRecurringNow={handleRunRecurringNow}
+              onDeleteRecurringRule={handleDeleteRecurringRule}
+              onOpenModal={() => openTransactionModal("expense")}
+            />
+          )}
 
-            {activeTab === "scanner" && (
-              <ScannerView
-                wallets={wallets}
-                customCategories={customCategories}
-                currency={currency}
-                language={language}
-                onSaveTransaction={handleAddTransaction}
-                onScanComplete={() => setActiveTab("transactions")}
-              />
-            )}
+          {activeTab === "calendar" && (
+            <CalendarView
+              transactions={transactions}
+              wallets={wallets}
+              recurringRules={recurringRules}
+              customCategories={customCategories}
+              selectedMonth={selectedMonth}
+              onSelectMonth={setSelectedMonth}
+              currency={currency}
+              language={language}
+              privacyMode={privacyMode}
+              onDeleteTransaction={handleDeleteTransaction}
+              onOpenNewTx={openTransactionModal}
+            />
+          )}
 
-            {activeTab === "budgets" && (
-              <BudgetsChallengesView
-                budgets={budgets}
-                transactions={transactions}
-                challenges={challenges}
-                debts={debts}
-                customCategories={customCategories}
-                selectedMonth={selectedMonth}
-                currency={currency}
-                language={language}
-                privacyMode={privacyMode}
-                onUpdateBudget={handleUpdateBudget}
-                onCheckInChallenge={handleCheckInChallenge}
-                onAddChallenge={handleAddChallenge}
-                onDeleteChallenge={handleDeleteChallenge}
-                onAddDebt={handleAddDebt}
-                onToggleDebtPaid={handleToggleDebtPaid}
-                onDeleteDebt={handleDeleteDebt}
-              />
-            )}
+          {activeTab === "scanner" && (
+            <ScannerView
+              wallets={wallets}
+              customCategories={customCategories}
+              currency={currency}
+              language={language}
+              onSaveTransaction={handleAddTransaction}
+              onScanComplete={() => setActiveTab("transactions")}
+            />
+          )}
 
-            {activeTab === "dreams" && (
-              <DreamsView
-                dreams={dreams}
-                jars={jars}
-                investments={investments}
-                cards={cards}
-                wallets={wallets}
-                currency={currency}
-                language={language}
-                privacyMode={privacyMode}
-                onAddDream={handleAddDream}
-                onContributeDream={handleContributeDream}
-                onDeleteDream={handleDeleteDream}
-                onAddJar={handleAddJar}
-                onTopUpJar={handleTopUpJar}
-                onDeleteJar={handleDeleteJar}
-                onAddInvestment={handleAddInvestment}
-                onUpdateInvestmentValue={handleUpdateInvestmentValue}
-                onDeleteInvestment={handleDeleteInvestment}
-                onAddCard={handleAddCard}
-                onChargeCard={handleChargeCard}
-                onPayCard={handlePayCard}
-                onDeleteCard={handleDeleteCard}
-              />
-            )}
+          {activeTab === "budgets" && (
+            <BudgetsChallengesView
+              budgets={budgets}
+              transactions={transactions}
+              challenges={challenges}
+              debts={debts}
+              customCategories={customCategories}
+              selectedMonth={selectedMonth}
+              currency={currency}
+              language={language}
+              privacyMode={privacyMode}
+              onUpdateBudget={handleUpdateBudget}
+              onCheckInChallenge={handleCheckInChallenge}
+              onAddChallenge={handleAddChallenge}
+              onDeleteChallenge={handleDeleteChallenge}
+              onAddDebt={handleAddDebt}
+              onToggleDebtPaid={handleToggleDebtPaid}
+              onDeleteDebt={handleDeleteDebt}
+            />
+          )}
 
-            {activeTab === "wallets" && (
-              <WalletsReportsView
-                wallets={wallets}
-                transactions={transactions}
-                budgets={budgets}
-                dreams={dreams}
-                autoTransfers={autoTransfers}
-                customCategories={customCategories}
-                selectedMonth={selectedMonth}
-                currency={currency}
-                language={language}
-                privacyMode={privacyMode}
-                onAddWallet={handleAddWallet}
-                onTransferWallet={handleTransferWallet}
-                onAddAutoTransfer={handleAddAutoTransfer}
-                onRunAutoTransfer={handleRunAutoTransfer}
-                onDeleteAutoTransfer={handleDeleteAutoTransfer}
-              />
-            )}
-          </main>
-        </div>
+          {activeTab === "dreams" && (
+            <DreamsView
+              dreams={dreams}
+              jars={jars}
+              investments={investments}
+              cards={cards}
+              wallets={wallets}
+              currency={currency}
+              language={language}
+              privacyMode={privacyMode}
+              onAddDream={handleAddDream}
+              onContributeDream={handleContributeDream}
+              onDeleteDream={handleDeleteDream}
+              onAddJar={handleAddJar}
+              onTopUpJar={handleTopUpJar}
+              onDeleteJar={handleDeleteJar}
+              onAddInvestment={handleAddInvestment}
+              onUpdateInvestmentValue={handleUpdateInvestmentValue}
+              onDeleteInvestment={handleDeleteInvestment}
+              onAddCard={handleAddCard}
+              onChargeCard={handleChargeCard}
+              onPayCard={handlePayCard}
+              onDeleteCard={handleDeleteCard}
+            />
+          )}
+
+          {activeTab === "wallets" && (
+            <WalletsReportsView
+              wallets={wallets}
+              transactions={transactions}
+              budgets={budgets}
+              dreams={dreams}
+              autoTransfers={autoTransfers}
+              customCategories={customCategories}
+              selectedMonth={selectedMonth}
+              currency={currency}
+              language={language}
+              privacyMode={privacyMode}
+              onAddWallet={handleAddWallet}
+              onTransferWallet={handleTransferWallet}
+              onAddAutoTransfer={handleAddAutoTransfer}
+              onRunAutoTransfer={handleRunAutoTransfer}
+              onDeleteAutoTransfer={handleDeleteAutoTransfer}
+            />
+          )}
+        </main>
       </div>
 
       {/* Compact 5-Column Kawaii Mobile Bottom Dock */}
