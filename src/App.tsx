@@ -36,7 +36,6 @@ import {
   INITIAL_TRANSACTIONS,
   INITIAL_WALLETS,
 } from "./data/seedData";
-import { formatMonthLabel } from "./utils/format";
 import { playPopChime } from "./utils/sound";
 import { OverviewView } from "./components/OverviewView";
 import { TransactionsView } from "./components/TransactionsView";
@@ -360,6 +359,30 @@ export default function App() {
         }),
       };
     });
+  };
+
+  const handleUpdateWalletBalance = (walletId: string, newBalance: number) => {
+    playPopChime(soundEnabled);
+    setState((prev) => ({
+      ...prev,
+      wallets: prev.wallets.map((w) =>
+        w.id === walletId ? { ...w, balance: newBalance } : w
+      ),
+    }));
+  };
+
+  const handleDeleteWallet = (walletId: string) => {
+    playPopChime(soundEnabled);
+    setState((prev) => {
+      if (prev.wallets.length <= 1) return prev;
+      return {
+        ...prev,
+        wallets: prev.wallets.filter((w) => w.id !== walletId),
+      };
+    });
+    if (selectedWalletFilter === walletId) {
+      setSelectedWalletFilter("all");
+    }
   };
 
   const handleUpdateBudget = (category: CategoryId, monthlyLimit: number) => {
@@ -774,7 +797,7 @@ export default function App() {
           : "bg-gradient-to-br from-[#EDE1FF] via-[#FFF4FB] to-[#DAF7EA] text-[#241F35]";
 
   return (
-    <div className={`relative min-h-screen overflow-x-hidden ${shellCanvasClass}`}>
+    <div className={`relative min-h-screen overflow-x-clip ${shellCanvasClass}`}>
       {/* Ambient Soft Pastel Aura for Glassmorphism */}
       <div
         aria-hidden="true"
@@ -871,8 +894,8 @@ export default function App() {
           </div>
 
           <div className="mt-2 flex items-center justify-between gap-2">
-            <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300 truncate">
-              {formatMonthLabel(selectedMonth, language)}
+            <span className="text-[11px] font-medium text-slate-600 dark:text-slate-300">
+              {language === "en" ? "Active Period" : "Periode Aktif"}
             </span>
             <input
               type="month"
@@ -913,6 +936,9 @@ export default function App() {
               onNavigate={setActiveTab}
               onOpenNewTx={openTransactionModal}
               onOpenProfile={() => setIsProfileOpen(true)}
+              onUpdateWalletBalance={handleUpdateWalletBalance}
+              onDeleteWallet={handleDeleteWallet}
+              onDeleteTransaction={handleDeleteTransaction}
             />
           )}
 
@@ -1039,6 +1065,7 @@ export default function App() {
         activeTab={activeTab}
         language={language}
         onSelectTab={setActiveTab}
+        onQuickAdd={() => openTransactionModal("expense")}
       />
 
       <TransactionModal
