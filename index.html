@@ -1,33 +1,96 @@
-<!doctype html>
-<html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
-    />
-    <meta name="theme-color" content="#F3ECFF" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Mucuw" />
-    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
-    <link rel="icon" type="image/svg+xml" href="./icon.svg" />
-    <title>Mucuw — Catat Keuangan &amp; Budgeting</title>
-    <meta
-      name="description"
-      content="Aplikasi pencatat keuangan pribadi, smart receipt scanner AI, budgeting anti-bocor, tantangan hemat, dan perencana impian finansial."
-    />
-    <meta property="og:title" content="Mucuw — Catat Keuangan &amp; Budgeting" />
-    <meta
-      property="og:description"
-      content="Catat pengeluaran, scan struk AI, atur budget anti-bocor, dan wujudkan impian finansial bareng Mucuw."
-    />
-    <meta property="og:type" content="website" />
-    <meta name="twitter:card" content="summary_large_image" />
-  </head>
-  <body class="overflow-x-hidden bg-[#F6F8F7] text-slate-900 antialiased dark:bg-[#0B0F0E] dark:text-slate-100">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
-</html>
+<!DOCTYPE html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Mochi Duit – Atur Uang Jadi Seru</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap">
+<style>
+:root{--bg:#fffaf3;--cd:#fff;--tx:#2d2640;--mu:#776f8c;--bd:#f0e4ec;--pk:#ffe0ee;--lv:#ece4ff;--mn:#d9f6e8;--bl:#dcedff;--yl:#fff2c9;--ac:#ff6fae;--ac2:#7c5cff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#17131f;--cd:#221c2e;--tx:#f6f1ff;--mu:#b5accb;--bd:#352d47;--pk:#3d2335;--lv:#2c2548;--mn:#1f3a30;--bl:#1e3048;--yl:#40371b}}
+:root[data-theme=dark]{--bg:#17131f;--cd:#221c2e;--tx:#f6f1ff;--mu:#b5accb;--bd:#352d47;--pk:#3d2335;--lv:#2c2548;--mn:#1f3a30;--bl:#1e3048;--yl:#40371b}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:calc(76px + env(safe-area-inset-top,0px))}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.55 "Plus Jakarta Sans",system-ui,sans-serif;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:10}
+.w{max-width:1120px;margin:auto;padding:0 20px}h1,h2,h3,p{margin:0}h1{font-size:clamp(34px,6vw,58px);line-height:1.08;font-weight:800;letter-spacing:-1.5px}h2{font-size:clamp(26px,4vw,38px);font-weight:800;letter-spacing:-1px;line-height:1.15}h3{font-size:18px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(12px)}nav .w{display:flex;align-items:center;gap:18px;height:68px}.lg{font-weight:800;font-size:20px;display:flex;gap:8px;align-items:center;margin-right:auto}.lg span{width:36px;height:36px;border-radius:12px;background:var(--pk);display:grid;place-items:center}
+nav a:not(.btn){color:var(--mu);text-decoration:none;font-weight:600;font-size:14px}nav a:hover{color:var(--ac)}
+.btn{border:0;border-radius:999px;padding:13px 24px;font:inherit;font-weight:700;cursor:pointer;background:var(--ac);color:#fff;text-decoration:none;display:inline-block;box-shadow:0 8px 20px #ff6fae44;transition:transform .2s}.btn:hover{transform:translateY(-2px) scale(1.03)}.btn.s{background:var(--cd);color:var(--tx);box-shadow:none;border:2px solid var(--bd)}.btn.sm{padding:9px 18px;font-size:14px}
+.bd{display:inline-block;font-size:12px;font-weight:700;padding:5px 12px;border-radius:99px;background:var(--lv);color:var(--ac2)}
+section{padding:64px 0}.hd{text-align:center;max-width:620px;margin:0 auto 36px;display:grid;gap:10px;justify-items:center}.mu{color:var(--mu)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-top:36px}.hero .t{display:grid;gap:20px;justify-items:start}.hl{background:linear-gradient(transparent 60%,var(--pk) 60%)}
+.cd{background:var(--cd);border:2px solid var(--bd);border-radius:28px;padding:22px;box-shadow:0 10px 30px #b08fd01a;transition:transform .25s,box-shadow .25s}.cd:hover{transform:translateY(-3px);box-shadow:0 16px 36px #b08fd02a}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chips button{border:2px solid var(--bd);background:var(--cd);color:var(--tx);border-radius:99px;padding:6px 14px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}.chips button.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+[data-th=cute] .tm{--pb:linear-gradient(145deg,#ffd6e8,#e6dcff);--pt:#2d2640;--pa:#ff6fae;--ps:#ffffffb8}[data-th=idol] .tm{--pb:linear-gradient(160deg,#1a0f3c,#5b2a9b);--pt:#fff;--pa:#ffd54f;--ps:#ffffff22}[data-th=minimal] .tm{--pb:#fff;--pt:#1b1b1f;--pa:#1b1b1f;--ps:#f1f1f4}
+.ph{background:var(--pb);color:var(--pt);border-radius:32px;padding:20px;border:2px solid var(--bd);box-shadow:0 20px 50px #7c5cff30;max-width:380px;margin:auto;display:grid;gap:12px;transition:.4s}
+.big{font-size:30px;font-weight:800;letter-spacing:-1px}.pb{height:10px;border-radius:9px;background:var(--ps);overflow:hidden}.pb i{display:block;height:100%;background:var(--pa);border-radius:9px;transition:width .6s}
+.sf{background:var(--ps);border-radius:18px;padding:12px 14px}.tx{display:flex;align-items:center;gap:10px;padding:7px 0;font-size:14px;animation:pop .35s}.tx b{margin-left:auto}.tx span{width:34px;height:34px;border-radius:11px;background:var(--ps);display:grid;place-items:center}
+@keyframes pop{from{opacity:0;transform:scale(.9) translateY(-6px)}}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}.sc{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.rc{position:relative;background:var(--yl);border-radius:22px;padding:18px;min-height:210px;overflow:hidden;font-size:14px}.rc .ln{position:absolute;left:0;right:0;height:4px;background:var(--ac);box-shadow:0 0 16px var(--ac);top:0;opacity:0}.rc.go .ln{opacity:1;animation:sw 1.3s ease-in-out}@keyframes sw{0%{top:0}50%{top:calc(100% - 4px)}100%{top:0}}
+.rs{display:grid;gap:8px;opacity:0;transform:translateY(8px);transition:.4s}.rs.on{opacity:1;transform:none}.rs div{display:flex;justify-content:space-between;background:var(--cd);border-radius:12px;padding:8px 12px}
+.w2{display:flex;gap:14px;flex-wrap:wrap;margin:14px 0}.wt{width:150px;height:150px;border-radius:26px;background:var(--pb);color:var(--pt);padding:14px;display:grid;align-content:space-between;transition:.4s}.ring{width:64px;height:64px;border-radius:50%;background:conic-gradient(var(--pa) calc(var(--p)*1%),var(--ps) 0);display:grid;place-items:center;font-weight:800;font-size:14px}.ring b{width:48px;height:48px;border-radius:50%;background:var(--cd);color:var(--tx);display:grid;place-items:center}
+.chat{height:230px;overflow:auto;display:flex;flex-direction:column;gap:8px;padding:4px}.m{max-width:85%;padding:10px 14px;border-radius:18px;font-size:14px;animation:pop .3s}.m.a{background:var(--lv);border-bottom-left-radius:4px}.m.u{background:var(--ac);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}.dots i{display:inline-block;width:6px;height:6px;margin:0 2px;border-radius:50%;background:var(--mu);animation:bn 1s infinite}.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}@keyframes bn{50%{transform:translateY(-4px)}}
+.tabs{display:flex;gap:6px;background:var(--lv);padding:5px;border-radius:99px;width:max-content;margin:0 auto 24px}.tabs button{border:0;background:none;color:var(--tx);padding:10px 20px;border-radius:99px;font:inherit;font-weight:700;cursor:pointer}.tabs button.on{background:var(--cd);box-shadow:0 4px 12px #7c5cff22}
+.pl{display:none}.pl.on{display:block;animation:pop .35s}.pos{display:grid;grid-template-columns:1.2fr .8fr;gap:20px}.pos.lk .pg{opacity:.35;pointer-events:none}.pg{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.prod{position:relative;border:2px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:20px;padding:14px;font:inherit;cursor:pointer;display:grid;gap:2px;text-align:left;font-size:14px}.prod span{font-size:26px}.prod small{color:var(--mu)}.prod i{position:absolute;top:8px;right:10px;background:var(--ac);color:#fff;font-style:normal;font-size:12px;border-radius:99px;padding:1px 8px}
+input[type=text],input[type=email]{font:inherit;border:2px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:99px;padding:11px 18px;min-width:0}.row{display:flex;justify-content:space-between;gap:10px;padding:6px 0;font-size:14px}.stt{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px}.stt div{border-radius:20px;padding:14px;font-size:13px}.stt b{display:block;font-size:18px}.wa{background:var(--mn);border-radius:16px;padding:10px 12px;font-size:13px;white-space:pre-wrap;margin:10px 0}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.steps .n{width:42px;height:42px;border-radius:14px;display:grid;place-items:center;font-weight:800;margin-bottom:10px}
+details{background:var(--cd);border:2px solid var(--bd);border-radius:20px;padding:16px 20px;margin-bottom:10px}summary{font-weight:700;cursor:pointer}details p{margin-top:8px;color:var(--mu)}
+.cta{background:var(--pk);border-radius:36px;padding:44px 24px;text-align:center;display:grid;gap:14px;justify-items:center}.cta form{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}footer{padding:40px 0 30px;border-top:2px solid var(--bd);font-size:14px;color:var(--mu)}footer .w{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}footer a{color:var(--mu);margin-right:14px}
+.ts{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:11px 20px;border-radius:99px;z-index:30;font-weight:600;font-size:14px;animation:pop .3s}
+@media(max-width:820px){.hero,.sc,.g2,.pos{grid-template-columns:1fr}.steps{grid-template-columns:1fr 1fr}nav a:not(.btn){display:none}section{padding:44px 0}.stt{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style></head><body data-x>
+<nav><div class="w"><div class="lg"><span>🍡</span>Mochi Duit</div><a href="#fitur">Fitur</a><a href="#widget">Widget &amp; AI</a><a href="#bisnis">Bisnis/POS</a><a href="#faq">FAQ</a><a class="btn sm" href="#mulai">Mulai Gratis</a></div></nav>
+<div class="w hero"><div class="t"><span class="bd">📱 iOS &amp; Android • AI Receipt Scanner</span><h1>Atur uang &amp; nabung jadi <span class="hl">seru</span>, tanpa catat manual yang ribet ✨</h1><p class="mu" style="font-size:18px">Foto struk, screenshot QRIS, atau chat singkat: Mochi yang nyatet. Kamu tinggal pantau widget lucu dan dengerin saran hemat yang santai, bukan ceramah.</p><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#mulai">Mulai Gratis 🚀</a><a class="btn s" href="#fitur">Coba Scan Struk</a></div></div>
+<div><div class="ph tm"><div style="display:flex;justify-content:space-between"><b>Hai, Nadia 👋</b><span style="font-size:13px;opacity:.8">Nov 2026</span></div><div><div style="font-size:13px;opacity:.8">Total saldo</div><div class="big" id="bal"></div></div><div class="sf"><div class="row" style="padding:0"><b>Budget bulanan</b><span id="bpct"></span></div><div class="pb"><i id="bbar"></i></div><div style="font-size:12px;opacity:.8" id="bsub"></div></div><div class="sf" id="txl"></div><button class="btn sm" style="background:var(--pa);color:var(--bg,#fff);box-shadow:none;mix-blend-mode:normal" onclick="rnd()">+ Catat jajan random 🧋</button></div>
+<div class="chips" style="justify-content:center;margin-top:16px" id="th"><button data-t="cute" class="on">🎀 Cute</button><button data-t="idol">🌟 Idol</button><button data-t="minimal">🤍 Minimalis</button></div></div></div>
+
+<section id="fitur"><div class="w"><div class="hd"><span class="bd">AI Auto-Catat</span><h2>Foto doang, transaksinya kecatat 📸</h2><p class="mu">Upload struk belanja atau screenshot pembayaran QRIS. AI baca nominal, kategori, dan tanggalnya dalam hitungan detik.</p></div>
+<div class="cd sc"><div><div class="rc" id="rc"><div class="ln"></div><div id="rph" style="text-align:center;padding-top:50px">🧾<br>Pilih salah satu, lalu klik Scan</div><div class="rs" id="rs"></div></div></div><div style="display:grid;gap:14px"><h3>Coba sendiri, gratis!</h3><div class="chips"><button class="btn sm" onclick="scan(0)">🧾 Scan Struk</button><button class="btn sm s" onclick="scan(1)">📲 Scan QRIS</button></div><p class="mu" id="scn">Hasil ekstraksi muncul di sini. Klik Simpan untuk lihat saldo di preview ikut berubah.</p><button class="btn sm" id="sv" style="background:var(--ac2);display:none;width:max-content" onclick="saveScan()">💾 Simpan ke catatan</button></div></div></div></section>
+
+<section id="widget" style="background:linear-gradient(var(--bg),var(--lv) 50%,var(--bg))"><div class="w"><div class="hd"><span class="bd">Widget &amp; AI Insight</span><h2>Saldo di homescreen, saran di genggaman 💌</h2><p class="mu">Ganti tema widget sesukamu, dan ngobrol sama Mochi AI yang selalu suportif.</p></div>
+<div class="g2"><div class="cd"><h3>Widget homescreen</h3><p class="mu" style="font-size:14px">Ganti tema, preview di hero ikut berubah!</p><div class="chips" style="margin-top:10px" id="th2"><button data-t="cute" class="on">🎀 Cute</button><button data-t="idol">🌟 Idol</button><button data-t="minimal">🤍 Minimalis</button></div><div class="w2 tm"><div class="wt"><span style="font-size:13px;opacity:.8">Saldo</span><b style="font-size:19px" id="wb"></b><span style="font-size:12px">🍡 Aman bulan ini</span></div><div class="wt"><span style="font-size:13px">Nabung Liburan 🏝️</span><div class="ring" id="rg"><b id="rgp"></b></div><span style="font-size:12px" id="rgs"></span></div></div><button class="btn sm" onclick="nab()">+ Nabung Rp 50.000 🐷</button></div>
+<div class="cd"><h3>Mochi AI 🤖💬</h3><div class="chat" id="chat"><div class="m a">Hai Nadia! Aku Mochi. Tanya apa aja soal duitmu ya 💜</div></div><div class="chips" style="margin-top:10px"><button onclick="ask(0)">Kok boros ya?</button><button onclick="ask(1)">Nabung 1 juta gimana?</button><button onclick="ask(2)">Tips weekend hemat</button></div></div></div></div></section>
+
+<section id="bisnis"><div class="w"><div class="hd"><span class="bd">Mode Bisnis &amp; Kasir</span><h2>Jualan juga kecatat rapi 🛍️</h2><p class="mu">Satu aplikasi buat dompet pribadi dan usahamu. Kasir PIN, order via WhatsApp, laporan modal &amp; untung otomatis.</p></div>
+<div class="tabs" id="tabs"><button data-p="pr">💖 Keuangan Pribadi</button><button data-p="bz" class="on">🏪 Bisnis / POS</button></div>
+<div class="pl" id="pr"><div class="cd"><div class="stt"><div style="background:var(--mn)">Pemasukan<b>Rp 5.200.000</b></div><div style="background:var(--pk)">Pengeluaran<b id="ps"></b></div><div style="background:var(--bl)">Tabungan<b id="pt"></b></div></div><p class="mu">Semua rekap pribadimu terhubung ke preview di atas. Coba catat jajan atau nabung, angkanya ikut berubah. Mau ngelola jualan? Pindah tab ke Bisnis 👆</p></div></div>
+<div class="pl on" id="bz"><div class="pos lk" id="pos"><div class="cd"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:14px"><b id="lk">🔒 Kasir terkunci</b><input type="text" id="pin" inputmode="numeric" maxlength="4" placeholder="PIN (coba 1234)" style="width:150px" oninput="pinc(this)"></div><div class="pg" id="prods"></div></div>
+<div style="display:grid;gap:20px"><div class="cd"><h3>Keranjang 🧺</h3><div id="cart" class="mu" style="margin:8px 0"></div><button class="btn sm" onclick="pay()">Bayar &amp; catat ✅</button><div class="wa" id="wam"></div><a class="btn sm s" id="wal" target="_blank" rel="noopener" href="#">💬 Order via WhatsApp</a></div>
+<div class="cd"><h3>Laporan hari ini</h3><div class="row"><span>Omzet</span><b id="om"></b></div><div class="row"><span>Modal</span><b id="md"></b></div><div class="row"><span>Untung bersih</span><b id="un" style="color:#2f9e6b"></b></div></div></div></div></div></div></section>
+
+<section id="cara"><div class="w"><div class="hd"><span class="bd">Cara pakai</span><h2>4 langkah, langsung jalan 🎯</h2></div><div class="steps"><div class="cd"><div class="n" style="background:var(--pk)">1</div><h3>Daftar</h3><p class="mu">Bikin akun pakai email, kurang dari semenit.</p></div><div class="cd"><div class="n" style="background:var(--mn)">2</div><h3>Foto &amp; catat</h3><p class="mu">Foto struk atau screenshot, sisanya Mochi yang urus.</p></div><div class="cd"><div class="n" style="background:var(--bl)">3</div><h3>Pantau</h3><p class="mu">Lihat widget dan baca insight AI yang santai.</p></div><div class="cd"><div class="n" style="background:var(--yl)">4</div><h3>Capai target</h3><p class="mu">Nabung liburan, gadget, atau modal usaha. Kamu pasti bisa 🎉</p></div></div></div></section>
+
+<section id="mulai"><div class="w"><div class="cta"><h2>Siap bikin uangmu lebih happy? 💖</h2><p class="mu">Gabung waitlist, jadi yang pertama dapat akses dan stiker eksklusif.</p><form onsubmit="return wl(event)"><input type="email" id="em" placeholder="Email kamu" required><button class="btn">Gabung Waitlist</button></form><p id="wlm" style="font-weight:700"></p></div></div></section>
+
+<section id="faq" style="padding-top:20px"><div class="w" style="max-width:720px"><div class="hd"><h2>Pertanyaan yang sering muncul 🙋</h2></div><details><summary>Beneran gratis?</summary><p>Fitur utama untuk keuangan pribadi gratis. Fitur bisnis lanjutan nanti ada paket terjangkau.</p></details><details><summary>Data keuanganku aman?</summary><p>Datamu dienkripsi dan hanya kamu yang bisa mengaksesnya. Kami tidak menjual datamu.</p></details><details><summary>Apakah bisa dipakai untuk usaha kecil?</summary><p>Bisa! Ada mode kasir dengan PIN, order via WhatsApp, dan laporan modal serta untung.</p></details><details><summary>Scan struknya akurat?</summary><p>Cukup akurat untuk struk yang jelas, dan kamu tetap bisa mengedit hasilnya sebelum disimpan.</p></details></div></section>
+
+<footer><div class="w"><div><div class="lg" style="margin-bottom:8px"><span>🍡</span>Mochi Duit</div><p>Teman atur uang yang bikin gemas, dari pelajar sampai pemilik toko.</p></div><div><p style="margin-bottom:8px"><a href="#" onclick="toast('Halaman Privacy Policy segera hadir');return false">Privacy Policy</a><a href="#" onclick="toast('Halaman Terms of Service segera hadir');return false">Terms of Service</a></p><p>📧 halo@mochiduit.id • 💬 Komunitas Discord &amp; IG @mochiduit</p></div></div><div class="w" style="margin-top:20px"><p>© 2026 Mochi Duit. Dibuat dengan 💜 di Indonesia.</p></div></footer>
+<script>
+const $=s=>document.querySelector(s),rp=n=>'Rp '+Math.round(n).toLocaleString('id-ID');
+let st={bal:2450000,sp:1275000,bud:2000000,sv:620000,tg:1000000,tx:[['💸','Gaji freelance',850000],['🛵','Ojol kampus',-22000],['☕','Kopi susu',-24000]],pend:null};
+function toast(m){const t=document.createElement('div');t.className='ts';t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2400)}
+function draw(){const p=Math.round(st.sp/st.bud*100),sp=Math.min(100,Math.round(st.sv/st.tg*100));
+$('#bal').textContent=rp(st.bal);$('#wb').textContent=rp(st.bal);$('#bpct').textContent=p+'%';$('#bbar').style.width=Math.min(100,p)+'%';$('#bsub').textContent=p>=100?'Budget habis, tahan dulu ya 🥺':'Sisa '+rp(st.bud-st.sp)+' bulan ini';
+$('#txl').innerHTML=st.tx.slice(0,3).map(t=>`<div class="tx"><span>${t[0]}</span>${t[1]}<b>${t[2]>0?'+':'-'}${rp(Math.abs(t[2]))}</b></div>`).join('');
+$('#ps').textContent=rp(st.sp);$('#pt').textContent=rp(st.sv);$('#rg').style.setProperty('--p',sp);$('#rgp').textContent=sp+'%';$('#rgs').textContent=rp(st.sv)+' / '+rp(st.tg)}
+function add(ic,n,a){st.tx.unshift([ic,n,-a]);st.bal-=a;st.sp+=a;draw()}
+const RN=[['🧋','Boba',28000],['🛵','Ojol',22000],['☕','Kopi',24000],['🍜','Indomie',9000],['🧴','Skincare',89000]];
+function rnd(){const r=RN[Math.floor(Math.random()*RN.length)];add(...r)}
+function nab(){if(st.sv>=st.tg)return toast('Target sudah tercapai 🎉');st.sv=Math.min(st.tg,st.sv+50000);st.bal-=50000;draw();toast(st.sv>=st.tg?'Target liburan tercapai! 🎉':'Mantap, nabung lagi 🐷')}
+function setTh(t){document.documentElement.dataset.th=t;document.querySelectorAll('#th button,#th2 button').forEach(b=>b.classList.toggle('on',b.dataset.t==t))}
+document.querySelectorAll('#th button,#th2 button').forEach(b=>b.onclick=()=>setTh(b.dataset.t));setTh('cute');
+const SC=[{t:'Struk belanja',m:'Alfamart Dago',n:47500,c:'🛒 Belanja',ic:'🛒'},{t:'QRIS',m:'Kopi Kenangan',n:28000,c:'☕ Jajan',ic:'☕'}];
+function scan(i){const s=SC[i],rc=$('#rc'),rs=$('#rs');rs.classList.remove('on');$('#rph').style.display='none';rc.classList.remove('go');void rc.offsetWidth;rc.classList.add('go');$('#sv').style.display='none';$('#scn').textContent='Lagi baca '+s.t.toLowerCase()+'...';
+setTimeout(()=>{rc.classList.remove('go');rs.innerHTML=`<div><span>Toko</span><b>${s.m}</b></div><div><span>Nominal</span><b>${rp(s.n)}</b></div><div><span>Kategori</span><b>${s.c}</b></div><div><span>Tanggal</span><b>${new Date().toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}</b></div>`;rs.classList.add('on');st.pend=s;$('#scn').textContent='Selesai! Data terbaca otomatis ✨';$('#sv').style.display='inline-block'},1300)}
+function saveScan(){const s=st.pend;if(!s)return;add(s.ic,s.m,s.n);st.pend=null;$('#sv').style.display='none';toast('Tersimpan! Cek saldo di preview 👆')}
+const AI=['Pengeluaran jajanmu naik 18% dibanding minggu lalu, terutama kopi dan boba 🧋. Tenang, nggak apa-apa! Coba batasi 3x seminggu dan sisihkan sisanya ke tabungan ya.','Gampang! Nabung Rp 1 juta dalam 30 hari = sekitar Rp 33 ribu per hari. Aku bisa ingetin tiap malam, dan satu kopi yang di-skip sudah hampir setengahnya 💪','Weekend hemat: bawa bekal 1x, pilih nongkrong yang gratisan (taman, car free day), dan set budget Rp 150 ribu. Sisa budgetnya masuk ke tabungan liburan 🏝️'],QS=['Kok boros ya?','Nabung 1 juta gimana?','Tips weekend hemat'];
+function ask(i){const c=$('#chat');c.insertAdjacentHTML('beforeend',`<div class="m u">${QS[i]}</div><div class="m a dots" id="ty"><i></i><i></i><i></i></div>`);c.scrollTop=c.scrollHeight;setTimeout(()=>{$('#ty').outerHTML=`<div class="m a">${AI[i]}</div>`;c.scrollTop=c.scrollHeight},900)}
+document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x==b));document.querySelectorAll('.pl').forEach(p=>p.classList.toggle('on',p.id==b.dataset.p))});
+const PR=[['☕','Es Kopi Susu',18000,8000],['🍵','Matcha Latte',22000,10000],['🥐','Croissant',15000,7000],['🍪','Cookies',12000,5000]];let cart={},pos={om:0,md:0};
+function pdraw(){$('#prods').innerHTML=PR.map((p,i)=>`<button class="prod" onclick="padd(${i})"><span>${p[0]}</span><b>${p[1]}</b><small>${rp(p[2])}</small>${cart[i]?`<i>${cart[i]}</i>`:''}</button>`).join('');
+const it=Object.entries(cart),tot=it.reduce((s,[i,q])=>s+PR[i][2]*q,0),msg=it.length?'Halo Kak! Aku mau pesan:\n'+it.map(([i,q])=>`- ${q}x ${PR[i][1]}`).join('\n')+'\nTotal: '+rp(tot)+'\nMakasih ya 🙏':'Pilih produk dulu untuk bikin pesan WhatsApp.';
+$('#cart').innerHTML=it.length?it.map(([i,q])=>`<div class="row"><span>${q}x ${PR[i][1]}</span><b>${rp(PR[i][2]*q)}</b></div>`).join('')+`<div class="row"><b>Total</b><b>${rp(tot)}</b></div>`:'Keranjang masih kosong';
+$('#wam').textContent=msg;$('#wal').href='https://wa.me/?text='+encodeURIComponent(msg);$('#om').textContent=rp(pos.om);$('#md').textContent=rp(pos.md);$('#un').textContent=rp(pos.om-pos.md)}
+const padd=i=>{cart[i]=(cart[i]||0)+1;pdraw()};
+function pay(){const it=Object.entries(cart);if(!it.length)return toast('Keranjang masih kosong');if($('#pos').classList.contains('lk'))return toast('Buka kasir dulu dengan PIN');it.forEach(([i,q])=>{pos.om+=PR[i][2]*q;pos.md+=PR[i][3]*q});cart={};pdraw();toast('Penjualan tercatat 🎉')}
+function pinc(e){const v=e.value;if(v.length<4)return;if(v=='1234'){$('#pos').classList.remove('lk');$('#lk').textContent='🔓 Kasir terbuka';toast('Halo Kasir! 👋')}else{toast('PIN salah, coba 1234');e.value=''}}
+function wl(e){e.preventDefault();$('#wlm').textContent='Yeay! '+$('#em').value+' sudah masuk waitlist 🎉';e.target.reset();return false}
+draw();pdraw();
+</script></body></html>
